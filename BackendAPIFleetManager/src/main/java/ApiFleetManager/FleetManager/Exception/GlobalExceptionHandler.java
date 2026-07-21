@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Object>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         log.error("Error de validación de Spring: ", ex);
-        // Recopilar todos los mensajes de validación campo por campo
+
         String mensajes = ex.getBindingResult().getFieldErrors().stream()
                 .map(fe -> "[" + fe.getField() + "] " + fe.getDefaultMessage())
                 .collect(Collectors.joining(", "));

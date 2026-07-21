@@ -68,6 +68,11 @@ public class VehiculoService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
+    public VehiculoDTO buscarPorPlaca(String placa) {
+        Optional<VehiculoEntity> entidadOpcional = repo.findByPlaca(placa);
+        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    }
+
     public boolean eliminarInfo(Integer id) {
         if (repo.existsById(id)) {
             repo.deleteById(id);

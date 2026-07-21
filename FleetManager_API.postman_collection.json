@@ -1,7 +1,7 @@
 {
     "info": {
         "name": "FleetManager API",
-        "description": "Colección completa para probar todos los métodos CRUD de la API FleetManager con las rutas correctas mapeadas desde los controladores (/api/rols, /api/usuarios, etc.).",
+        "description": "Colecci\u00f3n completa para probar todos los m\u00e9todos CRUD de la API FleetManager con las rutas correctas mapeadas desde los controladores (/api/rols, /api/usuarios, etc.).",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
@@ -119,46 +119,14 @@
                             ]
                         }
                     }
-                }
-            ]
-        },
-        {
-            "name": "Usuario",
-            "item": [
-                {
-                    "name": "Crear Usuario",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Perez\",\n    \"carnet\": \"JP123456\",\n    \"dui\": \"12345678-9\",\n    \"telefono\": \"7777-8888\",\n    \"correo\": \"juan.perez@email.com\",\n    \"passwordhash\": \"password123\",\n    \"fkRol\": 1\n}"
-                        },
-                        "url": {
-                            "raw": "http://localhost:8080/api/usuarios",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "usuarios"
-                            ]
-                        }
-                    }
                 },
                 {
-                    "name": "Obtener Todos los Usuario",
+                    "name": "Buscar Por Nombre",
                     "request": {
                         "method": "GET",
+                        "header": [],
                         "url": {
-                            "raw": "http://localhost:8080/api/usuarios",
+                            "raw": "http://localhost:8080/api/rols/nombre/Administrador",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -166,76 +134,13 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "usuarios"
+                                "rols",
+                                "nombre",
+                                "Administrador"
                             ]
                         }
-                    }
-                },
-                {
-                    "name": "Obtener Usuario por ID",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "http://localhost:8080/api/usuarios/1",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "usuarios",
-                                "1"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Actualizar Usuario",
-                    "request": {
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"idUsuario\": 1,\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Perez\",\n    \"carnet\": \"JP123456\",\n    \"dui\": \"12345678-9\",\n    \"telefono\": \"7777-8888\",\n    \"correo\": \"juan.perez@email.com\",\n    \"passwordhash\": \"password123\",\n    \"fkRol\": 1\n}"
-                        },
-                        "url": {
-                            "raw": "http://localhost:8080/api/usuarios",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "usuarios"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Eliminar Usuario",
-                    "request": {
-                        "method": "DELETE",
-                        "url": {
-                            "raw": "http://localhost:8080/api/usuarios/1",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "usuarios",
-                                "1"
-                            ]
-                        }
-                    }
+                    },
+                    "response": []
                 }
             ]
         },
@@ -353,6 +258,28 @@
                             ]
                         }
                     }
+                },
+                {
+                    "name": "Buscar Por Nombre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/api/estados/nombre/Activo",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "estados",
+                                "nombre",
+                                "Activo"
+                            ]
+                        }
+                    },
+                    "response": []
                 }
             ]
         },
@@ -470,6 +397,445 @@
                             ]
                         }
                     }
+                },
+                {
+                    "name": "Buscar Por Nombre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/api/marcas/nombre/Toyota",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "marcas",
+                                "nombre",
+                                "Toyota"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Taller",
+            "item": [
+                {
+                    "name": "Crear Taller",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombretaller\": \"Taller Los Motores\",\n    \"direccion\": \"Avenida Siempre Viva 123\",\n    \"responsable\": \"Carlos Mecanico\",\n    \"telefonotaller\": \"2222-3333\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/tallers",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tallers"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Todos los Taller",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/tallers",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tallers"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Taller por ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/tallers/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tallers",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar Taller",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"idTaller\": 1,\n    \"nombretaller\": \"Taller Los Motores\",\n    \"direccion\": \"Avenida Siempre Viva 123\",\n    \"responsable\": \"Carlos Mecanico\",\n    \"telefonotaller\": \"2222-3333\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/tallers",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tallers"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar Taller",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8080/api/tallers/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tallers",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Buscar Por Nombre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/api/tallers/nombre/Taller Central",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tallers",
+                                "nombre",
+                                "Taller Central"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Tipomantenimiento",
+            "item": [
+                {
+                    "name": "Crear Tipomantenimiento",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombretipom\": \"Preventivo\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/tipomantenimientos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tipomantenimientos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Todos los Tipomantenimiento",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/tipomantenimientos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tipomantenimientos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Tipomantenimiento por ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/tipomantenimientos/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tipomantenimientos",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar Tipomantenimiento",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"idTipomantenimiento\": 1,\n    \"nombretipom\": \"Preventivo\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/tipomantenimientos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tipomantenimientos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar Tipomantenimiento",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8080/api/tipomantenimientos/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tipomantenimientos",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Buscar Por Nombre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/api/tipomantenimientos/nombre/Preventivo",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tipomantenimientos",
+                                "nombre",
+                                "Preventivo"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Usuario",
+            "item": [
+                {
+                    "name": "Crear Usuario",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Perez\",\n    \"carnet\": \"JP123456\",\n    \"dui\": \"12345678-9\",\n    \"telefono\": \"7777-8888\",\n    \"correo\": \"juan.perez@email.com\",\n    \"passwordhash\": \"password123\",\n    \"fkRol\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/usuarios",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "usuarios"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Todos los Usuario",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/usuarios",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "usuarios"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Usuario por ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/usuarios/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "usuarios",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar Usuario",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"idUsuario\": 1,\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Perez\",\n    \"carnet\": \"JP123456\",\n    \"dui\": \"12345678-9\",\n    \"telefono\": \"7777-8888\",\n    \"correo\": \"juan.perez@email.com\",\n    \"passwordhash\": \"password123\",\n    \"fkRol\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/usuarios",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "usuarios"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar Usuario",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8080/api/usuarios/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "usuarios",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Buscar Por Nombre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/api/usuarios/nombre/admin",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "usuarios",
+                                "nombre",
+                                "admin"
+                            ]
+                        }
+                    },
+                    "response": []
                 }
             ]
         },
@@ -587,6 +953,167 @@
                             ]
                         }
                     }
+                },
+                {
+                    "name": "Buscar Por Nombre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/api/modelos/nombre/Corolla",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "modelos",
+                                "nombre",
+                                "Corolla"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Mantenimiento",
+            "item": [
+                {
+                    "name": "Crear Mantenimiento",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombremantenimiento\": \"Cambio de Aceite\",\n    \"costo\": 35.00,\n    \"fkTipomantenimiento\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/mantenimientos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "mantenimientos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Todos los Mantenimiento",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/mantenimientos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "mantenimientos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Mantenimiento por ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/api/mantenimientos/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "mantenimientos",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar Mantenimiento",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"idMantenimiento\": 1,\n    \"nombremantenimiento\": \"Cambio de Aceite\",\n    \"costo\": 35.00,\n    \"fkTipomantenimiento\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/mantenimientos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "mantenimientos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar Mantenimiento",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8080/api/mantenimientos/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "mantenimientos",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Buscar Por Nombre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/api/mantenimientos/nombre/Cambio de aceite",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "mantenimientos",
+                                "nombre",
+                                "Cambio de aceite"
+                            ]
+                        }
+                    },
+                    "response": []
                 }
             ]
         },
@@ -704,6 +1231,28 @@
                             ]
                         }
                     }
+                },
+                {
+                    "name": "Buscar Por Nombre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/api/tipos/nombre/Sedan",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "tipos",
+                                "nombre",
+                                "Sedan"
+                            ]
+                        }
+                    },
+                    "response": []
                 }
             ]
         },
@@ -821,6 +1370,28 @@
                             ]
                         }
                     }
+                },
+                {
+                    "name": "Buscar Por Placa",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/api/vehiculos/placa/P123456",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "vehiculos",
+                                "placa",
+                                "P123456"
+                            ]
+                        }
+                    },
+                    "response": []
                 }
             ]
         },
@@ -1073,7 +1644,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"galonestotales\": 10.5,\n    \"fechacarga\": \"2023-10-02\",\n    \"costo\": 45.50,\n    \"imagenfactura\": \"/img/factura1.jpg\",\n    \"fkAsignacion\": 1\n}"
+                            "raw": "{\n    \"galonestotales\": 10.5,\n    \"fechacarga\": \"2026-07-19\",\n    \"costo\": 45.50,\n    \"imagenfactura\": \"/img/factura1.jpg\",\n    \"fkAsignacion\": 1\n}"
                         },
                         "url": {
                             "raw": "http://localhost:8080/api/combustibles",
@@ -1168,357 +1739,6 @@
                             "path": [
                                 "api",
                                 "combustibles",
-                                "1"
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Taller",
-            "item": [
-                {
-                    "name": "Crear Taller",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"nombretaller\": \"Taller Los Motores\",\n    \"direccion\": \"Avenida Siempre Viva 123\",\n    \"responsable\": \"Carlos Mecanico\",\n    \"telefonotaller\": \"2222-3333\"\n}"
-                        },
-                        "url": {
-                            "raw": "http://localhost:8080/api/tallers",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tallers"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Obtener Todos los Taller",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "http://localhost:8080/api/tallers",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tallers"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Obtener Taller por ID",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "http://localhost:8080/api/tallers/1",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tallers",
-                                "1"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Actualizar Taller",
-                    "request": {
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"idTaller\": 1,\n    \"nombretaller\": \"Taller Los Motores\",\n    \"direccion\": \"Avenida Siempre Viva 123\",\n    \"responsable\": \"Carlos Mecanico\",\n    \"telefonotaller\": \"2222-3333\"\n}"
-                        },
-                        "url": {
-                            "raw": "http://localhost:8080/api/tallers",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tallers"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Eliminar Taller",
-                    "request": {
-                        "method": "DELETE",
-                        "url": {
-                            "raw": "http://localhost:8080/api/tallers/1",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tallers",
-                                "1"
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Tipomantenimiento",
-            "item": [
-                {
-                    "name": "Crear Tipomantenimiento",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"nombretipom\": \"Preventivo\"\n}"
-                        },
-                        "url": {
-                            "raw": "http://localhost:8080/api/tipomantenimientos",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tipomantenimientos"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Obtener Todos los Tipomantenimiento",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "http://localhost:8080/api/tipomantenimientos",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tipomantenimientos"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Obtener Tipomantenimiento por ID",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "http://localhost:8080/api/tipomantenimientos/1",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tipomantenimientos",
-                                "1"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Actualizar Tipomantenimiento",
-                    "request": {
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"idTipomantenimiento\": 1,\n    \"nombretipom\": \"Preventivo\"\n}"
-                        },
-                        "url": {
-                            "raw": "http://localhost:8080/api/tipomantenimientos",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tipomantenimientos"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Eliminar Tipomantenimiento",
-                    "request": {
-                        "method": "DELETE",
-                        "url": {
-                            "raw": "http://localhost:8080/api/tipomantenimientos/1",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "tipomantenimientos",
-                                "1"
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Mantenimiento",
-            "item": [
-                {
-                    "name": "Crear Mantenimiento",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"nombremantenimiento\": \"Cambio de Aceite\",\n    \"costo\": 35.00,\n    \"fkTipomantenimiento\": 1\n}"
-                        },
-                        "url": {
-                            "raw": "http://localhost:8080/api/mantenimientos",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "mantenimientos"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Obtener Todos los Mantenimiento",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "http://localhost:8080/api/mantenimientos",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "mantenimientos"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Obtener Mantenimiento por ID",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "http://localhost:8080/api/mantenimientos/1",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "mantenimientos",
-                                "1"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Actualizar Mantenimiento",
-                    "request": {
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"idMantenimiento\": 1,\n    \"nombremantenimiento\": \"Cambio de Aceite\",\n    \"costo\": 35.00,\n    \"fkTipomantenimiento\": 1\n}"
-                        },
-                        "url": {
-                            "raw": "http://localhost:8080/api/mantenimientos",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "mantenimientos"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Eliminar Mantenimiento",
-                    "request": {
-                        "method": "DELETE",
-                        "url": {
-                            "raw": "http://localhost:8080/api/mantenimientos/1",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8080",
-                            "path": [
-                                "api",
-                                "mantenimientos",
                                 "1"
                             ]
                         }

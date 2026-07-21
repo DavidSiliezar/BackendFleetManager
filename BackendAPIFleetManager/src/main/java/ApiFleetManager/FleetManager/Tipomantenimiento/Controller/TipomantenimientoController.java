@@ -75,6 +75,23 @@ public class TipomantenimientoController {
         }
     }
 
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<ApiResponse<TipomantenimientoDTO>> obtenerPorNombre(@PathVariable String nombre){
+        try{
+            TipomantenimientoDTO dto = service.buscarPorNombre(nombre);
+            if (dto != null){
+                ApiResponse<TipomantenimientoDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+                return ResponseEntity.ok(respuestaExitosa);
+            }
+            ApiResponse<TipomantenimientoDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
+        }catch (Exception e){
+            log.error("Error crítico, consulte con el administrador");
+            ApiResponse<TipomantenimientoDTO> respuestaError = new ApiResponse<>(false , "No se pudo completar la búsqueda del nombre " + nombre , null);
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<TipomantenimientoDTO>> eliminar(@PathVariable Integer id) {
         try {

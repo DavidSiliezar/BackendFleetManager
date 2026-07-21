@@ -62,6 +62,11 @@ public class MantenimientoService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
+    public MantenimientoDTO buscarPorNombre(String nombre) {
+        Optional<MantenimientoEntity> entidadOpcional = repo.findByNombremantenimiento(nombre);
+        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    }
+
     public boolean eliminarInfo(Integer id) {
         if (repo.existsById(id)) {
             repo.deleteById(id);

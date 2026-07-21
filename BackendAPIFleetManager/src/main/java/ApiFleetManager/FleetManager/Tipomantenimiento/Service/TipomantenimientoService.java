@@ -58,6 +58,11 @@ public class TipomantenimientoService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
+    public TipomantenimientoDTO buscarPorNombre(String nombre) {
+        Optional<TipomantenimientoEntity> entidadOpcional = repo.findByNombretipom(nombre);
+        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    }
+
     public boolean eliminarInfo(Integer id) {
         if (repo.existsById(id)) {
             repo.deleteById(id);

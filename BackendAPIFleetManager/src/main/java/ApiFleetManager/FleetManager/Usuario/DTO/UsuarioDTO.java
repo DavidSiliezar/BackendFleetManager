@@ -30,7 +30,7 @@ public class UsuarioDTO {
     @Size(max = 50, message = "El correo no puede superar 50 caracteres")
     private String correo;
     @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 6, max = 100, message = "La contraseña debe tener entre 6 y 100 caracteres")
+    @Size(min = 6, max = 255, message = "La contraseña debe tener entre 6 y 255 caracteres")
     private String passwordhash;
     @NotNull(message = "El rol es obligatorio")
     private Integer fkRol;

@@ -76,6 +76,23 @@ public class VehiculoController {
         }
     }
 
+    @GetMapping("/placa/{placa}")
+    public ResponseEntity<ApiResponse<VehiculoDTO>> obtenerPorPlaca(@PathVariable String placa){
+        try{
+            VehiculoDTO dto = service.buscarPorPlaca(placa);
+            if (dto != null){
+                ApiResponse<VehiculoDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+                return ResponseEntity.ok(respuestaExitosa);
+            }
+            ApiResponse<VehiculoDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
+        }catch (Exception e){
+            log.error("Error crítico, consulte con el administrador");
+            ApiResponse<VehiculoDTO> respuestaError = new ApiResponse<>(false , "No se pudo completar la búsqueda de la placa " + placa , null);
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<VehiculoDTO>> eliminar(@PathVariable Integer id) {
         try {

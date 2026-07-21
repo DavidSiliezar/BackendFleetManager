@@ -76,6 +76,23 @@ public class MantenimientoController {
         }
     }
 
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<ApiResponse<MantenimientoDTO>> obtenerPorNombre(@PathVariable String nombre){
+        try{
+            MantenimientoDTO dto = service.buscarPorNombre(nombre);
+            if (dto != null){
+                ApiResponse<MantenimientoDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+                return ResponseEntity.ok(respuestaExitosa);
+            }
+            ApiResponse<MantenimientoDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
+        }catch (Exception e){
+            log.error("Error crítico, consulte con el administrador");
+            ApiResponse<MantenimientoDTO> respuestaError = new ApiResponse<>(false , "No se pudo completar la búsqueda del nombre " + nombre , null);
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<MantenimientoDTO>> eliminar(@PathVariable Integer id) {
         try {

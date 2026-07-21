@@ -80,7 +80,225 @@
     
     <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
     
-    <h2>1. Módulo: Usuario</h2>
+    <h2>2. Módulo: Estado</h2>
+    <p><strong>Descripción:</strong> Estados de los vehículos (ej: Activo, Mantenimiento, Inactivo).</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 15%;">Método</th>
+                <th style="width: 45%;">Endpoint</th>
+                <th style="width: 40%;">Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td><code>/api/estados</code></td>
+                <td>Crear un nuevo registro de Estado.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/estados</code></td>
+                <td>Obtener todos los registros de Estado.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/estados/{id}</code></td>
+                <td>Obtener un registro de Estado por su ID.</td>
+            </tr>
+            <tr>
+                <td><span class="method put">PUT</span></td>
+                <td><code>/api/estados</code></td>
+                <td>Actualizar un registro existente de Estado.</td>
+            </tr>
+            <tr>
+                <td><span class="method delete">DELETE</span></td>
+                <td><code>/api/estados/{id}</code></td>
+                <td>Eliminar un registro de Estado por su ID.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
+    <pre>{
+    "nombreestado": "Activo"
+}</pre>
+    
+    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
+    <pre>{
+    "idEstado": 1,
+    "nombreestado": "Activo"
+}</pre>
+    
+    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
+    
+    <h2>3. Módulo: Marca</h2>
+    <p><strong>Descripción:</strong> Marcas de los vehículos (ej: Toyota, Nissan).</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 15%;">Método</th>
+                <th style="width: 45%;">Endpoint</th>
+                <th style="width: 40%;">Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td><code>/api/marcas</code></td>
+                <td>Crear un nuevo registro de Marca.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/marcas</code></td>
+                <td>Obtener todos los registros de Marca.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/marcas/{id}</code></td>
+                <td>Obtener un registro de Marca por su ID.</td>
+            </tr>
+            <tr>
+                <td><span class="method put">PUT</span></td>
+                <td><code>/api/marcas</code></td>
+                <td>Actualizar un registro existente de Marca.</td>
+            </tr>
+            <tr>
+                <td><span class="method delete">DELETE</span></td>
+                <td><code>/api/marcas/{id}</code></td>
+                <td>Eliminar un registro de Marca por su ID.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
+    <pre>{
+    "nombremarca": "Toyota"
+}</pre>
+    
+    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
+    <pre>{
+    "idMarca": 1,
+    "nombremarca": "Toyota"
+}</pre>
+    
+    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
+    
+    <h2>4. Módulo: Taller</h2>
+    <p><strong>Descripción:</strong> Talleres autorizados para el mantenimiento de vehículos.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 15%;">Método</th>
+                <th style="width: 45%;">Endpoint</th>
+                <th style="width: 40%;">Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td><code>/api/tallers</code></td>
+                <td>Crear un nuevo registro de Taller.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/tallers</code></td>
+                <td>Obtener todos los registros de Taller.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/tallers/{id}</code></td>
+                <td>Obtener un registro de Taller por su ID.</td>
+            </tr>
+            <tr>
+                <td><span class="method put">PUT</span></td>
+                <td><code>/api/tallers</code></td>
+                <td>Actualizar un registro existente de Taller.</td>
+            </tr>
+            <tr>
+                <td><span class="method delete">DELETE</span></td>
+                <td><code>/api/tallers/{id}</code></td>
+                <td>Eliminar un registro de Taller por su ID.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
+    <pre>{
+    "nombretaller": "Taller Los Motores",
+    "direccion": "Avenida Siempre Viva 123",
+    "responsable": "Carlos Mecanico",
+    "telefonotaller": "2222-3333"
+}</pre>
+    
+    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
+    <pre>{
+    "idTaller": 1,
+    "nombretaller": "Taller Los Motores",
+    "direccion": "Avenida Siempre Viva 123",
+    "responsable": "Carlos Mecanico",
+    "telefonotaller": "2222-3333"
+}</pre>
+    
+    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
+    
+    <h2>5. Módulo: Tipomantenimiento</h2>
+    <p><strong>Descripción:</strong> Clasificación de mantenimientos (Preventivo, Correctivo).</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 15%;">Método</th>
+                <th style="width: 45%;">Endpoint</th>
+                <th style="width: 40%;">Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td><code>/api/tipomantenimientos</code></td>
+                <td>Crear un nuevo registro de Tipomantenimiento.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/tipomantenimientos</code></td>
+                <td>Obtener todos los registros de Tipomantenimiento.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/tipomantenimientos/{id}</code></td>
+                <td>Obtener un registro de Tipomantenimiento por su ID.</td>
+            </tr>
+            <tr>
+                <td><span class="method put">PUT</span></td>
+                <td><code>/api/tipomantenimientos</code></td>
+                <td>Actualizar un registro existente de Tipomantenimiento.</td>
+            </tr>
+            <tr>
+                <td><span class="method delete">DELETE</span></td>
+                <td><code>/api/tipomantenimientos/{id}</code></td>
+                <td>Eliminar un registro de Tipomantenimiento por su ID.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
+    <pre>{
+    "nombretipom": "Preventivo"
+}</pre>
+    
+    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
+    <pre>{
+    "idTipomantenimiento": 1,
+    "nombretipom": "Preventivo"
+}</pre>
+    
+    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
+    
+    <h2>6. Módulo: Usuario</h2>
     <p><strong>Descripción:</strong> Información de los usuarios y empleados.</p>
     
     <table>
@@ -147,113 +365,7 @@
     
     <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
     
-    <h2>1. Módulo: Estado</h2>
-    <p><strong>Descripción:</strong> Estados de los vehículos (ej: Activo, Mantenimiento, Inactivo).</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/estados</code></td>
-                <td>Crear un nuevo registro de Estado.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/estados</code></td>
-                <td>Obtener todos los registros de Estado.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/estados/{id}</code></td>
-                <td>Obtener un registro de Estado por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/estados</code></td>
-                <td>Actualizar un registro existente de Estado.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/estados/{id}</code></td>
-                <td>Eliminar un registro de Estado por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombreestado": "Activo"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idEstado": 1,
-    "nombreestado": "Activo"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>1. Módulo: Marca</h2>
-    <p><strong>Descripción:</strong> Marcas de los vehículos (ej: Toyota, Nissan).</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/marcas</code></td>
-                <td>Crear un nuevo registro de Marca.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/marcas</code></td>
-                <td>Obtener todos los registros de Marca.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/marcas/{id}</code></td>
-                <td>Obtener un registro de Marca por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/marcas</code></td>
-                <td>Actualizar un registro existente de Marca.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/marcas/{id}</code></td>
-                <td>Eliminar un registro de Marca por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombremarca": "Toyota"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idMarca": 1,
-    "nombremarca": "Toyota"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>1. Módulo: Modelo</h2>
+    <h2>7. Módulo: Modelo</h2>
     <p><strong>Descripción:</strong> Modelos asociados a marcas específicas.</p>
     
     <table>
@@ -308,7 +420,64 @@
     
     <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
     
-    <h2>1. Módulo: Tipo</h2>
+    <h2>8. Módulo: Mantenimiento</h2>
+    <p><strong>Descripción:</strong> Catálogo general de mantenimientos disponibles (ej: Cambio de aceite).</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 15%;">Método</th>
+                <th style="width: 45%;">Endpoint</th>
+                <th style="width: 40%;">Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="method post">POST</span></td>
+                <td><code>/api/mantenimientos</code></td>
+                <td>Crear un nuevo registro de Mantenimiento.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/mantenimientos</code></td>
+                <td>Obtener todos los registros de Mantenimiento.</td>
+            </tr>
+            <tr>
+                <td><span class="method get">GET</span></td>
+                <td><code>/api/mantenimientos/{id}</code></td>
+                <td>Obtener un registro de Mantenimiento por su ID.</td>
+            </tr>
+            <tr>
+                <td><span class="method put">PUT</span></td>
+                <td><code>/api/mantenimientos</code></td>
+                <td>Actualizar un registro existente de Mantenimiento.</td>
+            </tr>
+            <tr>
+                <td><span class="method delete">DELETE</span></td>
+                <td><code>/api/mantenimientos/{id}</code></td>
+                <td>Eliminar un registro de Mantenimiento por su ID.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
+    <pre>{
+    "nombremantenimiento": "Cambio de Aceite",
+    "costo": 35.00,
+    "fkTipomantenimiento": 1
+}</pre>
+    
+    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
+    <pre>{
+    "idMantenimiento": 1,
+    "nombremantenimiento": "Cambio de Aceite",
+    "costo": 35.00,
+    "fkTipomantenimiento": 1
+}</pre>
+    
+    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
+    
+    <h2>9. Módulo: Tipo</h2>
     <p><strong>Descripción:</strong> Tipos o submodelos de vehículos asociados a modelos.</p>
     
     <table>
@@ -363,7 +532,7 @@
     
     <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
     
-    <h2>1. Módulo: Vehiculo</h2>
+    <h2>10. Módulo: Vehiculo</h2>
     <p><strong>Descripción:</strong> Información detallada de los vehículos en la flota.</p>
     
     <table>
@@ -426,7 +595,7 @@
     
     <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
     
-    <h2>1. Módulo: Asignacionvehiculo</h2>
+    <h2>11. Módulo: Asignacionvehiculo</h2>
     <p><strong>Descripción:</strong> Asignación de vehículos a motoristas con bitácora de viaje.</p>
     
     <table>
@@ -493,7 +662,7 @@
     
     <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
     
-    <h2>1. Módulo: Accidente</h2>
+    <h2>12. Módulo: Accidente</h2>
     <p><strong>Descripción:</strong> Registro de accidentes viales asociados a asignaciones de viaje.</p>
     
     <table>
@@ -554,7 +723,7 @@
     
     <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
     
-    <h2>1. Módulo: Combustible</h2>
+    <h2>13. Módulo: Combustible</h2>
     <p><strong>Descripción:</strong> Cargas de combustible asociadas a viajes asignados.</p>
     
     <table>
@@ -615,176 +784,7 @@
     
     <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
     
-    <h2>1. Módulo: Taller</h2>
-    <p><strong>Descripción:</strong> Talleres autorizados para el mantenimiento de vehículos.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/tallers</code></td>
-                <td>Crear un nuevo registro de Taller.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tallers</code></td>
-                <td>Obtener todos los registros de Taller.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tallers/{id}</code></td>
-                <td>Obtener un registro de Taller por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/tallers</code></td>
-                <td>Actualizar un registro existente de Taller.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/tallers/{id}</code></td>
-                <td>Eliminar un registro de Taller por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombretaller": "Taller Los Motores",
-    "direccion": "Avenida Siempre Viva 123",
-    "responsable": "Carlos Mecanico",
-    "telefonotaller": "2222-3333"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idTaller": 1,
-    "nombretaller": "Taller Los Motores",
-    "direccion": "Avenida Siempre Viva 123",
-    "responsable": "Carlos Mecanico",
-    "telefonotaller": "2222-3333"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>1. Módulo: Tipomantenimiento</h2>
-    <p><strong>Descripción:</strong> Clasificación de mantenimientos (Preventivo, Correctivo).</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/tipomantenimientos</code></td>
-                <td>Crear un nuevo registro de Tipomantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tipomantenimientos</code></td>
-                <td>Obtener todos los registros de Tipomantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tipomantenimientos/{id}</code></td>
-                <td>Obtener un registro de Tipomantenimiento por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/tipomantenimientos</code></td>
-                <td>Actualizar un registro existente de Tipomantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/tipomantenimientos/{id}</code></td>
-                <td>Eliminar un registro de Tipomantenimiento por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombretipom": "Preventivo"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idTipomantenimiento": 1,
-    "nombretipom": "Preventivo"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>1. Módulo: Mantenimiento</h2>
-    <p><strong>Descripción:</strong> Catálogo general de mantenimientos disponibles (ej: Cambio de aceite).</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/mantenimientos</code></td>
-                <td>Crear un nuevo registro de Mantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/mantenimientos</code></td>
-                <td>Obtener todos los registros de Mantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/mantenimientos/{id}</code></td>
-                <td>Obtener un registro de Mantenimiento por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/mantenimientos</code></td>
-                <td>Actualizar un registro existente de Mantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/mantenimientos/{id}</code></td>
-                <td>Eliminar un registro de Mantenimiento por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombremantenimiento": "Cambio de Aceite",
-    "costo": 35.00,
-    "fkTipomantenimiento": 1
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idMantenimiento": 1,
-    "nombremantenimiento": "Cambio de Aceite",
-    "costo": 35.00,
-    "fkTipomantenimiento": 1
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>1. Módulo: Registromantenimiento</h2>
+    <h2>14. Módulo: Registromantenimiento</h2>
     <p><strong>Descripción:</strong> Registro general de ingreso de vehículos a talleres.</p>
     
     <table>
@@ -847,7 +847,7 @@
     
     <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
     
-    <h2>1. Módulo: Detallemantenimiento</h2>
+    <h2>15. Módulo: Detallemantenimiento</h2>
     <p><strong>Descripción:</strong> Detalle de los mantenimientos específicos realizados dentro de un registro.</p>
     
     <table>
