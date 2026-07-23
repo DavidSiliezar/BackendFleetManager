@@ -55,9 +55,11 @@ public class ModeloService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
-    public ModeloDTO buscarPorNombre(String nombre) {
-        Optional<ModeloEntity> entidadOpcional = repo.findByNombremodelo(nombre);
-        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    public List<ModeloDTO> buscarPorNombre(String nombre) {
+        List<ModeloEntity> entidades = repo.findByNombremodelo(nombre);
+        return entidades.stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 
     public boolean eliminarInfo(Integer id) {

@@ -55,9 +55,11 @@ public class TipoService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
-    public TipoDTO buscarPorNombre(String nombre) {
-        Optional<TipoEntity> entidadOpcional = repo.findByNombretipo(nombre);
-        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    public List<TipoDTO> buscarPorNombre(String nombre) {
+        List<TipoEntity> entidades = repo.findByNombretipo(nombre);
+        return entidades.stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 
     public boolean eliminarInfo(Integer id) {

@@ -53,9 +53,11 @@ public class MarcaService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
-    public MarcaDTO buscarPorNombre(String nombre) {
-        Optional<MarcaEntity> entidadOpcional = repo.findByNombremarca(nombre);
-        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    public List<MarcaDTO> buscarPorNombre(String nombre) {
+        List<MarcaEntity> entidades = repo.findByNombremarca(nombre);
+        return entidades.stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 
     public boolean eliminarInfo(Integer id) {

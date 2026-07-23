@@ -53,9 +53,11 @@ public class RolService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
-    public RolDTO buscarPorNombre(String nombre) {
-        Optional<RolEntity> entidadOpcional = repo.findByNombrerol(nombre);
-        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    public List<RolDTO> buscarPorNombre(String nombre) {
+        List<RolEntity> entidades = repo.findByNombrerol(nombre);
+        return entidades.stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 
     public boolean eliminarInfo(Integer id) {

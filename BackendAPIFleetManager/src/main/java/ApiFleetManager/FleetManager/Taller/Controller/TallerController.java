@@ -58,13 +58,13 @@ public class TallerController {
     }
 
     @GetMapping("/nombre/{nombre}")
-    public ResponseEntity<ApiResponse<TallerDTO>> obtenerPorNombre(@PathVariable String nombre){
-        TallerDTO dto = service.buscarPorNombre(nombre);
-        if (dto != null){
-            ApiResponse<TallerDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+    public ResponseEntity<ApiResponse<List<TallerDTO>>> obtenerPorNombre(@PathVariable String nombre){
+        List<TallerDTO> listaDTO = service.buscarPorNombre(nombre);
+        if (listaDTO != null && !listaDTO.isEmpty()){
+            ApiResponse<List<TallerDTO>> respuestaExitosa = new ApiResponse<>(true, "Dato encontrado", listaDTO);
             return ResponseEntity.ok(respuestaExitosa);
         }
-        ApiResponse<TallerDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+        ApiResponse<List<TallerDTO>> noEncontrado = new ApiResponse<>(false, "Datos no encontrados", new java.util.ArrayList<>());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
     }
 

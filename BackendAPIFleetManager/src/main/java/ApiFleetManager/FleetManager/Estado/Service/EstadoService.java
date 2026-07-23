@@ -53,9 +53,11 @@ public class EstadoService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
-    public EstadoDTO buscarPorNombre(String nombre) {
-        Optional<EstadoEntity> entidadOpcional = repo.findByNombreestado(nombre);
-        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    public List<EstadoDTO> buscarPorNombre(String nombre) {
+        List<EstadoEntity> entidades = repo.findByNombreestado(nombre);
+        return entidades.stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 
     public boolean eliminarInfo(Integer id) {

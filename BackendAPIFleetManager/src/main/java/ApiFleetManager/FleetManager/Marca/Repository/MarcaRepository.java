@@ -4,9 +4,9 @@ import ApiFleetManager.FleetManager.Marca.Entity.MarcaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface MarcaRepository extends JpaRepository<MarcaEntity, Integer> {
-    Optional<MarcaEntity> findByNombremarca(String nombremarca);
+    List<MarcaEntity> findByNombremarca(String nombremarca);
 }

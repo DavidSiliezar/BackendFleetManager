@@ -59,9 +59,11 @@ public class TallerService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
-    public TallerDTO buscarPorNombre(String nombre) {
-        Optional<TallerEntity> entidadOpcional = repo.findByNombretaller(nombre);
-        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    public List<TallerDTO> buscarPorNombre(String nombre) {
+        List<TallerEntity> entidades = repo.findByNombretaller(nombre);
+        return entidades.stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 
     public boolean eliminarInfo(Integer id) {

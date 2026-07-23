@@ -58,13 +58,13 @@ public class TipomantenimientoController {
     }
 
     @GetMapping("/nombre/{nombre}")
-    public ResponseEntity<ApiResponse<TipomantenimientoDTO>> obtenerPorNombre(@PathVariable String nombre){
-        TipomantenimientoDTO dto = service.buscarPorNombre(nombre);
-        if (dto != null){
-            ApiResponse<TipomantenimientoDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+    public ResponseEntity<ApiResponse<List<TipomantenimientoDTO>>> obtenerPorNombre(@PathVariable String nombre){
+        List<TipomantenimientoDTO> listaDTO = service.buscarPorNombre(nombre);
+        if (listaDTO != null && !listaDTO.isEmpty()){
+            ApiResponse<List<TipomantenimientoDTO>> respuestaExitosa = new ApiResponse<>(true, "Dato encontrado", listaDTO);
             return ResponseEntity.ok(respuestaExitosa);
         }
-        ApiResponse<TipomantenimientoDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+        ApiResponse<List<TipomantenimientoDTO>> noEncontrado = new ApiResponse<>(false, "Datos no encontrados", new java.util.ArrayList<>());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
     }
 

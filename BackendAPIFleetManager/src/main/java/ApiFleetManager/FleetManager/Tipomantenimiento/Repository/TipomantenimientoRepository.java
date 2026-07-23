@@ -4,9 +4,9 @@ import ApiFleetManager.FleetManager.Tipomantenimiento.Entity.TipomantenimientoEn
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface TipomantenimientoRepository extends JpaRepository<TipomantenimientoEntity, Integer> {
-    Optional<TipomantenimientoEntity> findByNombretipom(String nombretipom);
+    List<TipomantenimientoEntity> findByNombretipom(String nombretipom);
 }

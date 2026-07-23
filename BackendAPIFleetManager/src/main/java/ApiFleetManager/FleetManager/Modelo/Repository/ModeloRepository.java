@@ -4,9 +4,9 @@ import ApiFleetManager.FleetManager.Modelo.Entity.ModeloEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface ModeloRepository extends JpaRepository<ModeloEntity, Integer> {
-    Optional<ModeloEntity> findByNombremodelo(String nombremodelo);
+    List<ModeloEntity> findByNombremodelo(String nombremodelo);
 }

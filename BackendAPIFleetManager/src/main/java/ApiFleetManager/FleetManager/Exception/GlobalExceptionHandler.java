@@ -32,6 +32,13 @@ public class GlobalExceptionHandler {
                 mensaje = "Se intentó insertar un valor nulo en una columna que no lo permite (NOT NULL constraint).";
             } else if (causeMessage.contains("ORA-32795")) {
                 mensaje = "No se puede insertar un valor en una columna generada automáticamente (GENERATED ALWAYS). No envíes el ID en el cuerpo del POST.";
+            } else if (causeMessage.contains("ORA-20001") || causeMessage.contains("ORA-20002") || causeMessage.contains("ORA-20003")) {
+                int idx = causeMessage.indexOf("ORA-200");
+                if (idx != -1) {
+                    mensaje = causeMessage.substring(idx).split("\n")[0];
+                } else {
+                    mensaje = causeMessage;
+                }
             }
         }
 

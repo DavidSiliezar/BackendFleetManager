@@ -4,9 +4,9 @@ import ApiFleetManager.FleetManager.Usuario.Entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer> {
-    Optional<UsuarioEntity> findByNombre(String nombre);
+    List<UsuarioEntity> findByNombre(String nombre);
 }

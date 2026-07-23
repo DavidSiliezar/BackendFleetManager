@@ -67,9 +67,11 @@ public class UsuarioService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
-    public UsuarioDTO buscarPorNombre(String nombre) {
-        Optional<UsuarioEntity> entidadOpcional = repo.findByNombre(nombre);
-        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    public List<UsuarioDTO> buscarPorNombre(String nombre) {
+        List<UsuarioEntity> entidades = repo.findByNombre(nombre);
+        return entidades.stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 
     public boolean eliminarInfo(Integer id) {

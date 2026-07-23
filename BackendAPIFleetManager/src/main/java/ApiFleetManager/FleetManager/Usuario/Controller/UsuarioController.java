@@ -59,13 +59,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/nombre/{nombre}")
-    public ResponseEntity<ApiResponse<UsuarioDTO>> obtenerPorNombre(@PathVariable String nombre){
-        UsuarioDTO dto = service.buscarPorNombre(nombre);
-        if (dto != null){
-            ApiResponse<UsuarioDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+    public ResponseEntity<ApiResponse<List<UsuarioDTO>>> obtenerPorNombre(@PathVariable String nombre){
+        List<UsuarioDTO> listaDTO = service.buscarPorNombre(nombre);
+        if (listaDTO != null && !listaDTO.isEmpty()){
+            ApiResponse<List<UsuarioDTO>> respuestaExitosa = new ApiResponse<>(true, "Dato encontrado", listaDTO);
             return ResponseEntity.ok(respuestaExitosa);
         }
-        ApiResponse<UsuarioDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+        ApiResponse<List<UsuarioDTO>> noEncontrado = new ApiResponse<>(false, "Datos no encontrados", new java.util.ArrayList<>());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
     }
 

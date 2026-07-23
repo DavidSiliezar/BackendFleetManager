@@ -12,6 +12,7 @@ public class CombustibleDTO {
     @NotNull(message = "Los galones son obligatorios")
     @DecimalMin(value = "0.01", message = "Los galones deben ser mayor a 0")
     private Double galonestotales;
+    @NotNull(message = "La fecha de carga es obligatoria")
     private java.time.LocalDate fechacarga;
     @NotNull(message = "El costo es obligatorio")
     @DecimalMin(value = "0.01", message = "El costo debe ser mayor a 0")

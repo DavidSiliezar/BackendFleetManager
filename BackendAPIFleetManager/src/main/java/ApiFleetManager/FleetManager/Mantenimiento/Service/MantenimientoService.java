@@ -57,9 +57,11 @@ public class MantenimientoService {
         return entidadOpcional.map(this::convertirADTO).orElse(null);
     }
 
-    public MantenimientoDTO buscarPorNombre(String nombre) {
-        Optional<MantenimientoEntity> entidadOpcional = repo.findByNombremantenimiento(nombre);
-        return entidadOpcional.map(this::convertirADTO).orElse(null);
+    public List<MantenimientoDTO> buscarPorNombre(String nombre) {
+        List<MantenimientoEntity> entidades = repo.findByNombremantenimiento(nombre);
+        return entidades.stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
     }
 
     public boolean eliminarInfo(Integer id) {
