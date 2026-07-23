@@ -23,14 +23,9 @@ public class VehiculoService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            VehiculoEntity entity = convertirAEntity(jsonData);
-            VehiculoEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        VehiculoEntity entity = convertirAEntity(jsonData);
+        VehiculoEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private VehiculoDTO convertirADTO(VehiculoEntity entitySave) {
@@ -82,23 +77,18 @@ public class VehiculoService {
     }
 
     public VehiculoDTO actualizarInfo(Integer id, @Valid VehiculoDTO dto) {
-        try {
-            Optional<VehiculoEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                VehiculoEntity entidad = entidadOpcional.get();
-                entidad.setPlaca(dto.getPlaca());
-                entidad.setKilometraje(dto.getKilometraje());
-                entidad.setNumerovin(dto.getNumerovin());
-                entidad.setTarjetacirculacion(dto.getTarjetacirculacion());
-                entidad.setFkTipo(dto.getFkTipo());
-                entidad.setFkEstado(dto.getFkEstado());
-                VehiculoEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
+        Optional<VehiculoEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            VehiculoEntity entidad = entidadOpcional.get();
+            entidad.setPlaca(dto.getPlaca());
+            entidad.setKilometraje(dto.getKilometraje());
+            entidad.setNumerovin(dto.getNumerovin());
+            entidad.setTarjetacirculacion(dto.getTarjetacirculacion());
+            entidad.setFkTipo(dto.getFkTipo());
+            entidad.setFkEstado(dto.getFkEstado());
+            VehiculoEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

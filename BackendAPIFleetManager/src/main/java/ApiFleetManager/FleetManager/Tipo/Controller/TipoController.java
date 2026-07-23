@@ -25,105 +25,69 @@ public class TipoController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<TipoDTO>> crear(@Valid @RequestBody TipoDTO json){
-        try{
-            TipoDTO objDTO = service.insertarDatos(json);
-            if (objDTO == null){
-                log.warn("Intento de inserción fallido " + json);
-                ApiResponse<TipoDTO> respuesta = new ApiResponse<>(false, "No se pudo completar el proceso de inserción", null);
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
-            }
-            log.info("Nuevos datos ingresados " + objDTO);
-            ApiResponse<TipoDTO> respuesta = new ApiResponse<>(true, "Dato ingresado exitosamente", objDTO);
-            return ResponseEntity.ok(respuesta);
-        }catch (Exception e){
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<TipoDTO> respuesta = new ApiResponse<>(false, "Error crítico: "+ e.getMessage(), null);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+        TipoDTO objDTO = service.insertarDatos(json);
+        if (objDTO == null){
+            log.warn("Intento de inserción fallido " + json);
+            ApiResponse<TipoDTO> respuesta = new ApiResponse<>(false, "No se pudo completar el proceso de inserción", null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
         }
+        log.info("Nuevos datos ingresados " + objDTO);
+        ApiResponse<TipoDTO> respuesta = new ApiResponse<>(true, "Dato ingresado exitosamente", objDTO);
+        return ResponseEntity.ok(respuesta);
     }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<TipoDTO>>> obtenerTodos(){
-        try{
-            List<TipoDTO> listaDTO = service.listarTodos();
-            if (listaDTO != null && !listaDTO.isEmpty()){
-                ApiResponse<List<TipoDTO>> respuestaExitosa = new ApiResponse<>(true , "Proceso completado" , listaDTO);
-                return ResponseEntity.ok(respuestaExitosa);
-            }
-            ApiResponse<List<TipoDTO>> respuestaNoData = new ApiResponse<>(true , "No hay datos por mostrar" , new java.util.ArrayList<>());
-            return ResponseEntity.ok(respuestaNoData);
-        }catch (Exception e){
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<List <TipoDTO>> respuestaError = new ApiResponse<>(false , "No se pudieron obtener los datos" , null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        List<TipoDTO> listaDTO = service.listarTodos();
+        if (listaDTO != null && !listaDTO.isEmpty()){
+            ApiResponse<List<TipoDTO>> respuestaExitosa = new ApiResponse<>(true , "Proceso completado" , listaDTO);
+            return ResponseEntity.ok(respuestaExitosa);
         }
+        ApiResponse<List<TipoDTO>> respuestaNoData = new ApiResponse<>(true , "No hay datos por mostrar" , new java.util.ArrayList<>());
+        return ResponseEntity.ok(respuestaNoData);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<TipoDTO>> obtenerPorId(@PathVariable Integer id){
-        try{
-            TipoDTO dto = service.buscarPorId(id);
-            if (dto != null){
-                ApiResponse<TipoDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
-                return ResponseEntity.ok(respuestaExitosa);
-            }
-            ApiResponse<TipoDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
-        }catch (Exception e){
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<TipoDTO> respuestaError = new ApiResponse<>(false , "No se pudo completar la búsqueda del id " + id , null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        TipoDTO dto = service.buscarPorId(id);
+        if (dto != null){
+            ApiResponse<TipoDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+            return ResponseEntity.ok(respuestaExitosa);
         }
+        ApiResponse<TipoDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
     }
 
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<ApiResponse<TipoDTO>> obtenerPorNombre(@PathVariable String nombre){
-        try{
-            TipoDTO dto = service.buscarPorNombre(nombre);
-            if (dto != null){
-                ApiResponse<TipoDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
-                return ResponseEntity.ok(respuestaExitosa);
-            }
-            ApiResponse<TipoDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
-        }catch (Exception e){
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<TipoDTO> respuestaError = new ApiResponse<>(false , "No se pudo completar la búsqueda del nombre " + nombre , null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        TipoDTO dto = service.buscarPorNombre(nombre);
+        if (dto != null){
+            ApiResponse<TipoDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+            return ResponseEntity.ok(respuestaExitosa);
         }
+        ApiResponse<TipoDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<TipoDTO>> eliminar(@PathVariable Integer id) {
-        try {
-            boolean respuesta = service.eliminarInfo(id);
-            if (respuesta) {
-                ApiResponse<TipoDTO> respuestaExitosa = new ApiResponse<>(true, "Dato con ID " + id + " eliminado exitosamente" , null );
-                return ResponseEntity.ok(respuestaExitosa);
-            }
-            ApiResponse<TipoDTO> respuestaNoRealizado = new ApiResponse<>(false, "El proceso de eliminación no se pudo completar", null);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuestaNoRealizado);
-        } catch (Exception e) {
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<TipoDTO> respuestaError = new ApiResponse<>(false , "Error inesperado, consulte con el administrador para solucionar el problema", null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        boolean respuesta = service.eliminarInfo(id);
+        if (respuesta) {
+            ApiResponse<TipoDTO> respuestaExitosa = new ApiResponse<>(true, "Dato con ID " + id + " eliminado exitosamente" , null );
+            return ResponseEntity.ok(respuestaExitosa);
         }
+        ApiResponse<TipoDTO> respuestaNoRealizado = new ApiResponse<>(false, "El proceso de eliminación no se pudo completar", null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuestaNoRealizado);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<TipoDTO>> actualizar(@PathVariable Integer id, @Valid @RequestBody TipoDTO dto) {
-        try {
-            TipoDTO objdto = service.actualizarInfo(id, dto);
-            if (objdto == null) {
-                ApiResponse<TipoDTO> respuestaNoRealizado = new ApiResponse<>(false, "No se pudo completar el proceso de actualización", null);
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuestaNoRealizado);
-            }
-            ApiResponse<TipoDTO> respuestaExitosa = new ApiResponse<>(true, "Proceso completado", objdto);
-            return ResponseEntity.ok(respuestaExitosa);
-        } catch (Exception e) {
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<TipoDTO> respuestaError = new ApiResponse<>(false , "Error inesperado, consulte con el administrador para solucionar el problema", null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        TipoDTO objdto = service.actualizarInfo(id, dto);
+        if (objdto == null) {
+            ApiResponse<TipoDTO> respuestaNoRealizado = new ApiResponse<>(false, "No se pudo completar el proceso de actualización", null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuestaNoRealizado);
         }
+        ApiResponse<TipoDTO> respuestaExitosa = new ApiResponse<>(true, "Proceso completado", objdto);
+        return ResponseEntity.ok(respuestaExitosa);
     }
 }

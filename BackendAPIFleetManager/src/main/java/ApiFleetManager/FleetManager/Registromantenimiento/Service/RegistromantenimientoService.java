@@ -23,14 +23,9 @@ public class RegistromantenimientoService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            RegistromantenimientoEntity entity = convertirAEntity(jsonData);
-            RegistromantenimientoEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        RegistromantenimientoEntity entity = convertirAEntity(jsonData);
+        RegistromantenimientoEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private RegistromantenimientoDTO convertirADTO(RegistromantenimientoEntity entitySave) {
@@ -77,23 +72,18 @@ public class RegistromantenimientoService {
     }
 
     public RegistromantenimientoDTO actualizarInfo(Integer id, @Valid RegistromantenimientoDTO dto) {
-        try {
-            Optional<RegistromantenimientoEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                RegistromantenimientoEntity entidad = entidadOpcional.get();
-                entidad.setFechaentrada(dto.getFechaentrada());
-                entidad.setFechasalida(dto.getFechasalida());
-                entidad.setObservaciones(dto.getObservaciones());
-                entidad.setFkVehiculo(dto.getFkVehiculo());
-                entidad.setFkTaller(dto.getFkTaller());
-                entidad.setFkAccidente(dto.getFkAccidente());
-                RegistromantenimientoEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
+        Optional<RegistromantenimientoEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            RegistromantenimientoEntity entidad = entidadOpcional.get();
+            entidad.setFechaentrada(dto.getFechaentrada());
+            entidad.setFechasalida(dto.getFechasalida());
+            entidad.setObservaciones(dto.getObservaciones());
+            entidad.setFkVehiculo(dto.getFkVehiculo());
+            entidad.setFkTaller(dto.getFkTaller());
+            entidad.setFkAccidente(dto.getFkAccidente());
+            RegistromantenimientoEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

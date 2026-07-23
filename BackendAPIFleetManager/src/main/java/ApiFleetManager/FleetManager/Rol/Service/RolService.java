@@ -23,14 +23,9 @@ public class RolService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            RolEntity entity = convertirAEntity(jsonData);
-            RolEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        RolEntity entity = convertirAEntity(jsonData);
+        RolEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private RolDTO convertirADTO(RolEntity entitySave) {
@@ -72,18 +67,13 @@ public class RolService {
     }
 
     public RolDTO actualizarInfo(Integer id, @Valid RolDTO dto) {
-        try {
-            Optional<RolEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                RolEntity entidad = entidadOpcional.get();
-                entidad.setNombrerol(dto.getNombrerol());
-                RolEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar el rol: " + e.getMessage());
+        Optional<RolEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            RolEntity entidad = entidadOpcional.get();
+            entidad.setNombrerol(dto.getNombrerol());
+            RolEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

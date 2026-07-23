@@ -23,14 +23,9 @@ public class TallerService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            TallerEntity entity = convertirAEntity(jsonData);
-            TallerEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        TallerEntity entity = convertirAEntity(jsonData);
+        TallerEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private TallerDTO convertirADTO(TallerEntity entitySave) {
@@ -78,21 +73,16 @@ public class TallerService {
     }
 
     public TallerDTO actualizarInfo(Integer id, @Valid TallerDTO dto) {
-        try {
-            Optional<TallerEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                TallerEntity entidad = entidadOpcional.get();
-                entidad.setNombretaller(dto.getNombretaller());
-                entidad.setDireccion(dto.getDireccion());
-                entidad.setResponsable(dto.getResponsable());
-                entidad.setTelefonotaller(dto.getTelefonotaller());
-                TallerEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar el taller: " + e.getMessage());
+        Optional<TallerEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            TallerEntity entidad = entidadOpcional.get();
+            entidad.setNombretaller(dto.getNombretaller());
+            entidad.setDireccion(dto.getDireccion());
+            entidad.setResponsable(dto.getResponsable());
+            entidad.setTelefonotaller(dto.getTelefonotaller());
+            TallerEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

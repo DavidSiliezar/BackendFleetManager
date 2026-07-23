@@ -23,14 +23,9 @@ public class TipoService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            TipoEntity entity = convertirAEntity(jsonData);
-            TipoEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        TipoEntity entity = convertirAEntity(jsonData);
+        TipoEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private TipoDTO convertirADTO(TipoEntity entitySave) {
@@ -74,19 +69,14 @@ public class TipoService {
     }
 
     public TipoDTO actualizarInfo(Integer id, @Valid TipoDTO dto) {
-        try {
-            Optional<TipoEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                TipoEntity entidad = entidadOpcional.get();
-                entidad.setNombretipo(dto.getNombretipo());
-                entidad.setFkModelo(dto.getFkModelo());
-                TipoEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
+        Optional<TipoEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            TipoEntity entidad = entidadOpcional.get();
+            entidad.setNombretipo(dto.getNombretipo());
+            entidad.setFkModelo(dto.getFkModelo());
+            TipoEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

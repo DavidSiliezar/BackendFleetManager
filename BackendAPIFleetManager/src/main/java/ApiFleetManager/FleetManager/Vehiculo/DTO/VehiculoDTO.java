@@ -10,7 +10,7 @@ import lombok.Data;
 public class VehiculoDTO {
     private Integer idVehiculo;
     @NotBlank(message = "La placa es obligatoria")
-    @Pattern(regexp = "^[PCMNTR][1-9][0-9]{0,2}-[0-9]{1,3}$", message = "Formato de placa inválido (ej: P123-456)")
+    @Pattern(regexp = "^[PCMNTR][0-9]{1,3}-[0-9]{1,3}$", message = "Formato de placa inválido (ej: P123-456)")
     private String placa;
     @NotNull(message = "El kilometraje es obligatorio")
     @DecimalMin(value = "0.0", message = "El kilometraje no puede ser negativo")

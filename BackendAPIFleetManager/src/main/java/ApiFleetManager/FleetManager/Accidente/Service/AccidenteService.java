@@ -23,14 +23,9 @@ public class AccidenteService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            AccidenteEntity entity = convertirAEntity(jsonData);
-            AccidenteEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        AccidenteEntity entity = convertirAEntity(jsonData);
+        AccidenteEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private AccidenteDTO convertirADTO(AccidenteEntity entitySave) {
@@ -75,22 +70,17 @@ public class AccidenteService {
     }
 
     public AccidenteDTO actualizarInfo(Integer id, @Valid AccidenteDTO dto) {
-        try {
-            Optional<AccidenteEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                AccidenteEntity entidad = entidadOpcional.get();
-                entidad.setFechaaccidente(dto.getFechaaccidente());
-                entidad.setLugar(dto.getLugar());
-                entidad.setDescripcion(dto.getDescripcion());
-                entidad.setImagen(dto.getImagen());
-                entidad.setFkAsignacion(dto.getFkAsignacion());
-                AccidenteEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
+        Optional<AccidenteEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            AccidenteEntity entidad = entidadOpcional.get();
+            entidad.setFechaaccidente(dto.getFechaaccidente());
+            entidad.setLugar(dto.getLugar());
+            entidad.setDescripcion(dto.getDescripcion());
+            entidad.setImagen(dto.getImagen());
+            entidad.setFkAsignacion(dto.getFkAsignacion());
+            AccidenteEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

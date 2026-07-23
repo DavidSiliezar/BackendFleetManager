@@ -23,14 +23,9 @@ public class CombustibleService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            CombustibleEntity entity = convertirAEntity(jsonData);
-            CombustibleEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        CombustibleEntity entity = convertirAEntity(jsonData);
+        CombustibleEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private CombustibleDTO convertirADTO(CombustibleEntity entitySave) {
@@ -75,22 +70,17 @@ public class CombustibleService {
     }
 
     public CombustibleDTO actualizarInfo(Integer id, @Valid CombustibleDTO dto) {
-        try {
-            Optional<CombustibleEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                CombustibleEntity entidad = entidadOpcional.get();
-                entidad.setGalonestotales(dto.getGalonestotales());
-                entidad.setFechacarga(dto.getFechacarga());
-                entidad.setCosto(dto.getCosto());
-                entidad.setImagenfactura(dto.getImagenfactura());
-                entidad.setFkAsignacion(dto.getFkAsignacion());
-                CombustibleEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
+        Optional<CombustibleEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            CombustibleEntity entidad = entidadOpcional.get();
+            entidad.setGalonestotales(dto.getGalonestotales());
+            entidad.setFechacarga(dto.getFechacarga());
+            entidad.setCosto(dto.getCosto());
+            entidad.setImagenfactura(dto.getImagenfactura());
+            entidad.setFkAsignacion(dto.getFkAsignacion());
+            CombustibleEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

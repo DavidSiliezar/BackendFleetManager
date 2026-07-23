@@ -23,14 +23,9 @@ public class DetallemantenimientoService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            DetallemantenimientoEntity entity = convertirAEntity(jsonData);
-            DetallemantenimientoEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        DetallemantenimientoEntity entity = convertirAEntity(jsonData);
+        DetallemantenimientoEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private DetallemantenimientoDTO convertirADTO(DetallemantenimientoEntity entitySave) {
@@ -73,21 +68,16 @@ public class DetallemantenimientoService {
     }
 
     public DetallemantenimientoDTO actualizarInfo(Integer id, @Valid DetallemantenimientoDTO dto) {
-        try {
-            Optional<DetallemantenimientoEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                DetallemantenimientoEntity entidad = entidadOpcional.get();
-                entidad.setCantidad(dto.getCantidad());
-                entidad.setCosto(dto.getCosto());
-                entidad.setFkRegistromantenimiento(dto.getFkRegistromantenimiento());
-                entidad.setFkMantenimiento(dto.getFkMantenimiento());
-                DetallemantenimientoEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
+        Optional<DetallemantenimientoEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            DetallemantenimientoEntity entidad = entidadOpcional.get();
+            entidad.setCantidad(dto.getCantidad());
+            entidad.setCosto(dto.getCosto());
+            entidad.setFkRegistromantenimiento(dto.getFkRegistromantenimiento());
+            entidad.setFkMantenimiento(dto.getFkMantenimiento());
+            DetallemantenimientoEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

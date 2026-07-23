@@ -23,14 +23,9 @@ public class MarcaService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            MarcaEntity entity = convertirAEntity(jsonData);
-            MarcaEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        MarcaEntity entity = convertirAEntity(jsonData);
+        MarcaEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private MarcaDTO convertirADTO(MarcaEntity entitySave) {
@@ -72,18 +67,13 @@ public class MarcaService {
     }
 
     public MarcaDTO actualizarInfo(Integer id, @Valid MarcaDTO dto) {
-        try {
-            Optional<MarcaEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                MarcaEntity entidad = entidadOpcional.get();
-                entidad.setNombremarca(dto.getNombremarca());
-                MarcaEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar la marca: " + e.getMessage());
+        Optional<MarcaEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            MarcaEntity entidad = entidadOpcional.get();
+            entidad.setNombremarca(dto.getNombremarca());
+            MarcaEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

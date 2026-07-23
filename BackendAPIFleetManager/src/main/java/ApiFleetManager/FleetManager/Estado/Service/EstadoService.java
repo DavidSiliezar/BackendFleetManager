@@ -23,14 +23,9 @@ public class EstadoService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            EstadoEntity entity = convertirAEntity(jsonData);
-            EstadoEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        EstadoEntity entity = convertirAEntity(jsonData);
+        EstadoEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private EstadoDTO convertirADTO(EstadoEntity entitySave) {
@@ -72,18 +67,13 @@ public class EstadoService {
     }
 
     public EstadoDTO actualizarInfo(Integer id, @Valid EstadoDTO dto) {
-        try {
-            Optional<EstadoEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                EstadoEntity entidad = entidadOpcional.get();
-                entidad.setNombreestado(dto.getNombreestado());
-                EstadoEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar el estado: " + e.getMessage());
+        Optional<EstadoEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            EstadoEntity entidad = entidadOpcional.get();
+            entidad.setNombreestado(dto.getNombreestado());
+            EstadoEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

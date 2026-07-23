@@ -23,14 +23,9 @@ public class AsignacionvehiculoService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            AsignacionvehiculoEntity entity = convertirAEntity(jsonData);
-            AsignacionvehiculoEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        AsignacionvehiculoEntity entity = convertirAEntity(jsonData);
+        AsignacionvehiculoEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private AsignacionvehiculoDTO convertirADTO(AsignacionvehiculoEntity entitySave) {
@@ -81,25 +76,20 @@ public class AsignacionvehiculoService {
     }
 
     public AsignacionvehiculoDTO actualizarInfo(Integer id, @Valid AsignacionvehiculoDTO dto) {
-        try {
-            Optional<AsignacionvehiculoEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                AsignacionvehiculoEntity entidad = entidadOpcional.get();
-                entidad.setFkUsuario(dto.getFkUsuario());
-                entidad.setFkVehiculo(dto.getFkVehiculo());
-                entidad.setFechaasignacion(dto.getFechaasignacion());
-                entidad.setHorasalida(dto.getHorasalida());
-                entidad.setHoraentrega(dto.getHoraentrega());
-                entidad.setKilometrajeinicial(dto.getKilometrajeinicial());
-                entidad.setKilometrajefinal(dto.getKilometrajefinal());
-                entidad.setObservaciones(dto.getObservaciones());
-                AsignacionvehiculoEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
+        Optional<AsignacionvehiculoEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            AsignacionvehiculoEntity entidad = entidadOpcional.get();
+            entidad.setFkUsuario(dto.getFkUsuario());
+            entidad.setFkVehiculo(dto.getFkVehiculo());
+            entidad.setFechaasignacion(dto.getFechaasignacion());
+            entidad.setHorasalida(dto.getHorasalida());
+            entidad.setHoraentrega(dto.getHoraentrega());
+            entidad.setKilometrajeinicial(dto.getKilometrajeinicial());
+            entidad.setKilometrajefinal(dto.getKilometrajefinal());
+            entidad.setObservaciones(dto.getObservaciones());
+            AsignacionvehiculoEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

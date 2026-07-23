@@ -23,14 +23,9 @@ public class UsuarioService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            UsuarioEntity entity = convertirAEntity(jsonData);
-            UsuarioEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        UsuarioEntity entity = convertirAEntity(jsonData);
+        UsuarioEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private UsuarioDTO convertirADTO(UsuarioEntity entitySave) {
@@ -86,25 +81,20 @@ public class UsuarioService {
     }
 
     public UsuarioDTO actualizarInfo(Integer id, @Valid UsuarioDTO dto) {
-        try {
-            Optional<UsuarioEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                UsuarioEntity entidad = entidadOpcional.get();
-                entidad.setNombre(dto.getNombre());
-                entidad.setApellido(dto.getApellido());
-                entidad.setCarnet(dto.getCarnet());
-                entidad.setDui(dto.getDui());
-                entidad.setTelefono(dto.getTelefono());
-                entidad.setCorreo(dto.getCorreo());
-                entidad.setPasswordhash(dto.getPasswordhash());
-                entidad.setFkRol(dto.getFkRol());
-                UsuarioEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
+        Optional<UsuarioEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            UsuarioEntity entidad = entidadOpcional.get();
+            entidad.setNombre(dto.getNombre());
+            entidad.setApellido(dto.getApellido());
+            entidad.setCarnet(dto.getCarnet());
+            entidad.setDui(dto.getDui());
+            entidad.setTelefono(dto.getTelefono());
+            entidad.setCorreo(dto.getCorreo());
+            entidad.setPasswordhash(dto.getPasswordhash());
+            entidad.setFkRol(dto.getFkRol());
+            UsuarioEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

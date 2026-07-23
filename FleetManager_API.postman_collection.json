@@ -1,7 +1,7 @@
 {
     "info": {
         "name": "FleetManager API",
-        "description": "Colecci\u00f3n completa para probar todos los m\u00e9todos CRUD de la API FleetManager con las rutas correctas mapeadas desde los controladores (/api/rols, /api/usuarios, etc.).",
+        "description": "Colección completa para probar todos los métodos CRUD de la API FleetManager con las rutas correctas mapeadas desde los controladores (/api/rols, /api/usuarios, etc.).",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
@@ -88,7 +88,7 @@
                             "raw": "{\n    \"idRol\": 1,\n    \"nombrerol\": \"Administrador\"\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/rols",
+                            "raw": "http://localhost:8080/api/rols/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -96,7 +96,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "rols"
+                                "rols",
+                                "1"
                             ]
                         }
                     }
@@ -227,7 +228,7 @@
                             "raw": "{\n    \"idEstado\": 1,\n    \"nombreestado\": \"Activo\"\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/estados",
+                            "raw": "http://localhost:8080/api/estados/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -235,7 +236,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "estados"
+                                "estados",
+                                "1"
                             ]
                         }
                     }
@@ -366,7 +368,7 @@
                             "raw": "{\n    \"idMarca\": 1,\n    \"nombremarca\": \"Toyota\"\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/marcas",
+                            "raw": "http://localhost:8080/api/marcas/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -374,7 +376,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "marcas"
+                                "marcas",
+                                "1"
                             ]
                         }
                     }
@@ -505,7 +508,7 @@
                             "raw": "{\n    \"idTaller\": 1,\n    \"nombretaller\": \"Taller Los Motores\",\n    \"direccion\": \"Avenida Siempre Viva 123\",\n    \"responsable\": \"Carlos Mecanico\",\n    \"telefonotaller\": \"2222-3333\"\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/tallers",
+                            "raw": "http://localhost:8080/api/tallers/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -513,7 +516,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "tallers"
+                                "tallers",
+                                "1"
                             ]
                         }
                     }
@@ -644,7 +648,7 @@
                             "raw": "{\n    \"idTipomantenimiento\": 1,\n    \"nombretipom\": \"Preventivo\"\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/tipomantenimientos",
+                            "raw": "http://localhost:8080/api/tipomantenimientos/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -652,7 +656,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "tipomantenimientos"
+                                "tipomantenimientos",
+                                "1"
                             ]
                         }
                     }
@@ -783,7 +788,7 @@
                             "raw": "{\n    \"idUsuario\": 1,\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Perez\",\n    \"carnet\": \"JP123456\",\n    \"dui\": \"12345678-9\",\n    \"telefono\": \"7777-8888\",\n    \"correo\": \"juan.perez@email.com\",\n    \"passwordhash\": \"password123\",\n    \"fkRol\": 1\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/usuarios",
+                            "raw": "http://localhost:8080/api/usuarios/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -791,7 +796,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "usuarios"
+                                "usuarios",
+                                "1"
                             ]
                         }
                     }
@@ -922,7 +928,7 @@
                             "raw": "{\n    \"idModelo\": 1,\n    \"nombremodelo\": \"Corolla\",\n    \"fkMarca\": 1\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/modelos",
+                            "raw": "http://localhost:8080/api/modelos/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -930,7 +936,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "modelos"
+                                "modelos",
+                                "1"
                             ]
                         }
                     }
@@ -1061,7 +1068,7 @@
                             "raw": "{\n    \"idMantenimiento\": 1,\n    \"nombremantenimiento\": \"Cambio de Aceite\",\n    \"costo\": 35.00,\n    \"fkTipomantenimiento\": 1\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/mantenimientos",
+                            "raw": "http://localhost:8080/api/mantenimientos/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -1069,7 +1076,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "mantenimientos"
+                                "mantenimientos",
+                                "1"
                             ]
                         }
                     }
@@ -1200,7 +1208,7 @@
                             "raw": "{\n    \"idTipo\": 1,\n    \"nombretipo\": \"Sedan\",\n    \"fkModelo\": 1\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/tipos",
+                            "raw": "http://localhost:8080/api/tipos/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -1208,7 +1216,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "tipos"
+                                "tipos",
+                                "1"
                             ]
                         }
                     }
@@ -1339,7 +1348,7 @@
                             "raw": "{\n    \"idVehiculo\": 1,\n    \"placa\": \"P123-456\",\n    \"kilometraje\": 15000.50,\n    \"numerovin\": \"1HGCM82633A004123\",\n    \"tarjetacirculacion\": \"TARJ-987654321\",\n    \"fkTipo\": 1,\n    \"fkEstado\": 1\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/vehiculos",
+                            "raw": "http://localhost:8080/api/vehiculos/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -1347,7 +1356,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "vehiculos"
+                                "vehiculos",
+                                "1"
                             ]
                         }
                     }
@@ -1478,7 +1488,7 @@
                             "raw": "{\n    \"idAsignacion\": 1,\n    \"fkUsuario\": 1,\n    \"fkVehiculo\": 1,\n    \"fechaasignacion\": \"2023-10-01\",\n    \"horasalida\": \"2023-10-01T08:00:00\",\n    \"horaentrega\": \"2023-10-01T17:00:00\",\n    \"kilometrajeinicial\": 15000.50,\n    \"kilometrajefinal\": 15050.50,\n    \"observaciones\": \"Viaje a sucursal\"\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/asignacionvehiculos",
+                            "raw": "http://localhost:8080/api/asignacionvehiculos/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -1486,7 +1496,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "asignacionvehiculos"
+                                "asignacionvehiculos",
+                                "1"
                             ]
                         }
                     }
@@ -1595,7 +1606,7 @@
                             "raw": "{\n    \"idAccidente\": 1,\n    \"fechaaccidente\": \"2023-10-15\",\n    \"lugar\": \"Calle Principal\",\n    \"descripcion\": \"Choque leve\",\n    \"imagen\": \"/img/accidente1.jpg\",\n    \"fkAsignacion\": 1\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/accidentes",
+                            "raw": "http://localhost:8080/api/accidentes/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -1603,7 +1614,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "accidentes"
+                                "accidentes",
+                                "1"
                             ]
                         }
                     }
@@ -1712,7 +1724,7 @@
                             "raw": "{\n    \"idCombustible\": 1,\n    \"galonestotales\": 10.5,\n    \"fechacarga\": \"2023-10-02\",\n    \"costo\": 45.50,\n    \"imagenfactura\": \"/img/factura1.jpg\",\n    \"fkAsignacion\": 1\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/combustibles",
+                            "raw": "http://localhost:8080/api/combustibles/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -1720,7 +1732,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "combustibles"
+                                "combustibles",
+                                "1"
                             ]
                         }
                     }
@@ -1829,7 +1842,7 @@
                             "raw": "{\n    \"idRegistromantenimiento\": 1,\n    \"fechaentrada\": \"2023-11-01\",\n    \"fechasalida\": \"2023-11-02\",\n    \"observaciones\": \"Mantenimiento rutinario\",\n    \"fkVehiculo\": 1,\n    \"fkTaller\": 1,\n    \"fkAccidente\": null\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/registromantenimientos",
+                            "raw": "http://localhost:8080/api/registromantenimientos/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -1837,7 +1850,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "registromantenimientos"
+                                "registromantenimientos",
+                                "1"
                             ]
                         }
                     }
@@ -1946,7 +1960,7 @@
                             "raw": "{\n    \"idDetallemantenimiento\": 1,\n    \"cantidad\": 1,\n    \"costo\": 35.00,\n    \"fkRegistromantenimiento\": 1,\n    \"fkMantenimiento\": 1\n}"
                         },
                         "url": {
-                            "raw": "http://localhost:8080/api/detallemantenimientos",
+                            "raw": "http://localhost:8080/api/detallemantenimientos/1",
                             "protocol": "http",
                             "host": [
                                 "localhost"
@@ -1954,7 +1968,8 @@
                             "port": "8080",
                             "path": [
                                 "api",
-                                "detallemantenimientos"
+                                "detallemantenimientos",
+                                "1"
                             ]
                         }
                     }

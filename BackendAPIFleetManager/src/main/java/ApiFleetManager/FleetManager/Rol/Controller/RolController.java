@@ -25,104 +25,68 @@ public class RolController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<RolDTO>> crear(@Valid @RequestBody RolDTO json){
-        try{
-            RolDTO objDTO = service.insertarDatos(json);
-            if (objDTO == null){
-                log.warn("Intento de inserción fallido " + json);
-                ApiResponse<RolDTO> respuesta = new ApiResponse<>(false, "No se pudo completar el proceso de inserción", null);
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
-            }
-            log.info("Nuevos datos ingresados " + objDTO);
-            ApiResponse<RolDTO> respuesta = new ApiResponse<>(true, "Dato ingresado exitosamente", objDTO);
-            return ResponseEntity.ok(respuesta);
-        }catch (Exception e){
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<RolDTO> respuesta = new ApiResponse<>(false, "Error crítico: "+ e.getMessage(), null);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+        RolDTO objDTO = service.insertarDatos(json);
+        if (objDTO == null){
+            log.warn("Intento de inserción fallido " + json);
+            ApiResponse<RolDTO> respuesta = new ApiResponse<>(false, "No se pudo completar el proceso de inserción", null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
         }
+        log.info("Nuevos datos ingresados " + objDTO);
+        ApiResponse<RolDTO> respuesta = new ApiResponse<>(true, "Dato ingresado exitosamente", objDTO);
+        return ResponseEntity.ok(respuesta);
     }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<RolDTO>>> obtenerTodos(){
-        try{
-            List<RolDTO> listaDTO = service.listarTodos();
-            if (listaDTO != null && !listaDTO.isEmpty()){
-                ApiResponse<List<RolDTO>> respuestaExitosa = new ApiResponse<>(true , "Proceso completado" , listaDTO);
-                return ResponseEntity.ok(respuestaExitosa);
-            }
-            return ResponseEntity.ok(new ApiResponse<>(true, "No hay datos por mostrar", new java.util.ArrayList<>()));
-        }catch (Exception e){
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<List <RolDTO>> respuestaError = new ApiResponse<>(false , "No se pudieron obtener los datos" , null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        List<RolDTO> listaDTO = service.listarTodos();
+        if (listaDTO != null && !listaDTO.isEmpty()){
+            ApiResponse<List<RolDTO>> respuestaExitosa = new ApiResponse<>(true , "Proceso completado" , listaDTO);
+            return ResponseEntity.ok(respuestaExitosa);
         }
+        return ResponseEntity.ok(new ApiResponse<>(true, "No hay datos por mostrar", new java.util.ArrayList<>()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<RolDTO>> obtenerPorId(@PathVariable Integer id){
-        try{
-            RolDTO dto = service.buscarPorId(id);
-            if (dto != null){
-                ApiResponse<RolDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
-                return ResponseEntity.ok(respuestaExitosa);
-            }
-            ApiResponse<RolDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
-        }catch (Exception e){
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<RolDTO> respuestaError = new ApiResponse<>(false , "No se pudo completar la búsqueda del id " + id , null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        RolDTO dto = service.buscarPorId(id);
+        if (dto != null){
+            ApiResponse<RolDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+            return ResponseEntity.ok(respuestaExitosa);
         }
+        ApiResponse<RolDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
     }
 
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<ApiResponse<RolDTO>> obtenerPorNombre(@PathVariable String nombre){
-        try{
-            RolDTO dto = service.buscarPorNombre(nombre);
-            if (dto != null){
-                ApiResponse<RolDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
-                return ResponseEntity.ok(respuestaExitosa);
-            }
-            ApiResponse<RolDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
-        }catch (Exception e){
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<RolDTO> respuestaError = new ApiResponse<>(false , "No se pudo completar la búsqueda del nombre " + nombre , null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        RolDTO dto = service.buscarPorNombre(nombre);
+        if (dto != null){
+            ApiResponse<RolDTO> respuestaExitosa = new ApiResponse<>(true , "Dato encontrado" , dto);
+            return ResponseEntity.ok(respuestaExitosa);
         }
+        ApiResponse<RolDTO> noEncontrado = new ApiResponse<>(false,"Datos no encontrados" , null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noEncontrado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<RolDTO>> eliminar(@PathVariable Integer id) {
-        try {
-            boolean respuesta = service.eliminarInfo(id);
-            if (respuesta) {
-                ApiResponse<RolDTO> respuestaExitosa = new ApiResponse<>(true, "Dato con ID " + id + " eliminado exitosamente" , null );
-                return ResponseEntity.ok(respuestaExitosa);
-            }
-            ApiResponse<RolDTO> respuestaNoRealizado = new ApiResponse<>(false, "El proceso de eliminación no se pudo completar", null);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuestaNoRealizado);
-        } catch (Exception e) {
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<RolDTO> respuestaError = new ApiResponse<>(false , "Error inesperado, consulte con el administrador para solucionar el problema", null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        boolean respuesta = service.eliminarInfo(id);
+        if (respuesta) {
+            ApiResponse<RolDTO> respuestaExitosa = new ApiResponse<>(true, "Dato con ID " + id + " eliminado exitosamente" , null );
+            return ResponseEntity.ok(respuestaExitosa);
         }
+        ApiResponse<RolDTO> respuestaNoRealizado = new ApiResponse<>(false, "El proceso de eliminación no se pudo completar", null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuestaNoRealizado);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<RolDTO>> actualizar(@PathVariable Integer id, @Valid @RequestBody RolDTO dto) {
-        try {
-            RolDTO objdto = service.actualizarInfo(id, dto);
-            if (objdto == null) {
-                ApiResponse<RolDTO> respuestaNoRealizado = new ApiResponse<>(false, "No se pudo completar el proceso de actualización", null);
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuestaNoRealizado);
-            }
-            ApiResponse<RolDTO> respuestaExitosa = new ApiResponse<>(true, "Proceso completado", objdto);
-            return ResponseEntity.ok(respuestaExitosa);
-        } catch (Exception e) {
-            log.error("Error crítico, consulte con el administrador");
-            ApiResponse<RolDTO> respuestaError = new ApiResponse<>(false , "Error inesperado, consulte con el administrador para solucionar el problema", null);
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaError);
+        RolDTO objdto = service.actualizarInfo(id, dto);
+        if (objdto == null) {
+            ApiResponse<RolDTO> respuestaNoRealizado = new ApiResponse<>(false, "No se pudo completar el proceso de actualización", null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuestaNoRealizado);
         }
+        ApiResponse<RolDTO> respuestaExitosa = new ApiResponse<>(true, "Proceso completado", objdto);
+        return ResponseEntity.ok(respuestaExitosa);
     }
 }

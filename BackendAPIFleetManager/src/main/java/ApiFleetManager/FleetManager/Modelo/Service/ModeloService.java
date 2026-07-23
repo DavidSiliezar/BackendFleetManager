@@ -23,14 +23,9 @@ public class ModeloService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            ModeloEntity entity = convertirAEntity(jsonData);
-            ModeloEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        ModeloEntity entity = convertirAEntity(jsonData);
+        ModeloEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private ModeloDTO convertirADTO(ModeloEntity entitySave) {
@@ -74,19 +69,14 @@ public class ModeloService {
     }
 
     public ModeloDTO actualizarInfo(Integer id, @Valid ModeloDTO dto) {
-        try {
-            Optional<ModeloEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                ModeloEntity entidad = entidadOpcional.get();
-                entidad.setNombremodelo(dto.getNombremodelo());
-                entidad.setFkMarca(dto.getFkMarca());
-                ModeloEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
+        Optional<ModeloEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            ModeloEntity entidad = entidadOpcional.get();
+            entidad.setNombremodelo(dto.getNombremodelo());
+            entidad.setFkMarca(dto.getFkMarca());
+            ModeloEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

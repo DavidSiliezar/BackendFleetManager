@@ -23,14 +23,9 @@ public class TipomantenimientoService {
         if (jsonData == null){
             throw new IllegalArgumentException("El dato no puede ser nulo");
         }
-        try{
-            TipomantenimientoEntity entity = convertirAEntity(jsonData);
-            TipomantenimientoEntity entitySave = repo.save(entity);
-            return convertirADTO(entitySave);
-        }catch (Exception e){
-            log.error("Error al ingresar la información: " + e.getMessage());
-            throw new RuntimeException("Error al registrar el dato");
-        }
+        TipomantenimientoEntity entity = convertirAEntity(jsonData);
+        TipomantenimientoEntity entitySave = repo.save(entity);
+        return convertirADTO(entitySave);
     }
 
     private TipomantenimientoDTO convertirADTO(TipomantenimientoEntity entitySave) {
@@ -72,18 +67,13 @@ public class TipomantenimientoService {
     }
 
     public TipomantenimientoDTO actualizarInfo(Integer id, @Valid TipomantenimientoDTO dto) {
-        try {
-            Optional<TipomantenimientoEntity> entidadOpcional = repo.findById(id);
-            if (entidadOpcional.isPresent()) {
-                TipomantenimientoEntity entidad = entidadOpcional.get();
-                entidad.setNombretipom(dto.getNombretipom());
-                TipomantenimientoEntity datosGuardados = repo.save(entidad);
-                return convertirADTO(datosGuardados);
-            }
-            return null;
-        } catch (Exception e) {
-            log.error("Ocurrió un error al procesar la información");
-            throw new RuntimeException("Error al actualizar el tipo de mantenimiento: " + e.getMessage());
+        Optional<TipomantenimientoEntity> entidadOpcional = repo.findById(id);
+        if (entidadOpcional.isPresent()) {
+            TipomantenimientoEntity entidad = entidadOpcional.get();
+            entidad.setNombretipom(dto.getNombretipom());
+            TipomantenimientoEntity datosGuardados = repo.save(entidad);
+            return convertirADTO(datosGuardados);
         }
+        return null;
     }
 }

@@ -1,19 +1,3 @@
-DROP TABLE TBL_DETALLEMANTENIMIENTO CASCADE CONSTRAINTS;
-DROP TABLE TBL_REGISTROMANTENIMIENTO CASCADE CONSTRAINTS;
-DROP TABLE TBL_ACCIDENTE CASCADE CONSTRAINTS;
-DROP TABLE TBL_COMBUSTIBLE CASCADE CONSTRAINTS;
-DROP TABLE TBL_ASIGNACIONVEHICULO CASCADE CONSTRAINTS;
-DROP TABLE TBL_MANTENIMIENTO CASCADE CONSTRAINTS;
-DROP TABLE TBL_TIPOMANTENIMIENTO CASCADE CONSTRAINTS;
-DROP TABLE TBL_VEHICULO CASCADE CONSTRAINTS;
-DROP TABLE TBL_TIPO CASCADE CONSTRAINTS;
-DROP TABLE TBL_MODELO CASCADE CONSTRAINTS;
-DROP TABLE TBL_MARCA CASCADE CONSTRAINTS;
-DROP TABLE TBL_ESTADO CASCADE CONSTRAINTS;
-DROP TABLE TBL_USUARIO CASCADE CONSTRAINTS;
-DROP TABLE TBL_ROL CASCADE CONSTRAINTS;
-DROP TABLE TBL_TALLER CASCADE CONSTRAINTS;
-
 CREATE TABLE TBL_ROL(
     ID_ROL INT GENERATED ALWAYS AS IDENTITY,
     NOMBREROL VARCHAR2(25) NOT NULL UNIQUE,
@@ -87,7 +71,7 @@ COMMENT ON COLUMN TBL_TIPO.FK_MODELO IS 'Modelo exacto al que esta asociado este
 
 CREATE TABLE TBL_VEHICULO(
     ID_VEHICULO INT GENERATED ALWAYS AS IDENTITY,
-    PLACA VARCHAR2(15) CHECK(REGEXP_LIKE(PLACA,'^[PCMNTR][1-9][0-9]{0,2}-[0-9]{1,3}$')) UNIQUE NOT NULL,
+    PLACA VARCHAR2(15) CHECK(REGEXP_LIKE(PLACA,'^[PCMNTR][0-9]{1,3}-[0-9]{1,3}$')) UNIQUE NOT NULL,
     KILOMETRAJE NUMBER(12,2) CHECK(KILOMETRAJE>=0) NOT NULL,
     NUMEROVIN VARCHAR2(17) NOT NULL UNIQUE CHECK(REGEXP_LIKE(NUMEROVIN,'^[A-HJ-NPR-Z0-9]{17}$')),
     TARJETACIRCULACION VARCHAR2(30) NOT NULL UNIQUE CHECK(REGEXP_LIKE(TARJETACIRCULACION,'^[A-Z0-9-]{5,30}$')),
@@ -231,22 +215,33 @@ CREATE TABLE TBL_DETALLEMANTENIMIENTO(
 );
 COMMENT ON COLUMN TBL_DETALLEMANTENIMIENTO.ID_DETALLEMANTENIMIENTO IS 'Identificador de la linea cobrada en la factura del taller.';
 COMMENT ON COLUMN TBL_DETALLEMANTENIMIENTO.CANTIDAD IS 'Cuantas veces cobraron este servicio o cuantos repuestos le pusieron.';
-COMMENT ON COLUMN TBL_DETALLEMANTENIMIENTO.COSTO IS 'Cuanto cobraron exactamente por este trabajo ya aplicado.';
+COMMENT ON COLUMN TBL_DETALLEMANTENIMIENTO.COSTO IS 'Cuanto cobraron exactamente por este trabajo ya applied.';
 COMMENT ON COLUMN TBL_DETALLEMANTENIMIENTO.FK_REGISTROMANTENIMIENTO IS 'Visita al taller donde hicieron este trabajo en el carro.';
 COMMENT ON COLUMN TBL_DETALLEMANTENIMIENTO.FK_MANTENIMIENTO IS 'Trabajo del catalogo que estan cobrando en esta linea.';
 
+/* 
+    1. No se permiten registros con fechas futuras (usamos TRUNC para comparar 
+       unicamente el dia sin importar la hora exacta en la que se guarda)
+    2. No se permiten facturas antiguas con mas de 30 dias de retraso para 
+       mantener la contabilidad del negocio al dia
+*/
 CREATE OR REPLACE TRIGGER TRG_VALIDAR_FECHACARGA
 BEFORE INSERT OR UPDATE ON TBL_COMBUSTIBLE
 FOR EACH ROW
 BEGIN
-    IF :NEW.FECHACARGA > TRUNC(SYSDATE) THEN
+    IF TRUNC(:NEW.FECHACARGA) > TRUNC(SYSDATE) THEN
         RAISE_APPLICATION_ERROR(-20001, 'La fecha de carga no puede ser una fecha futura.');
-    ELSIF :NEW.FECHACARGA < TRUNC(SYSDATE) - 30 THEN
+    ELSIF TRUNC(:NEW.FECHACARGA) < TRUNC(SYSDATE) - 30 THEN
         RAISE_APPLICATION_ERROR(-20001, 'No se pueden registrar facturas con mas de 30 dias de antiguedad.');
     END IF;
 END;
 /
 
+/* 
+    - Cuando un vehiculo finaliza su mantenimiento y se registra la fecha de 
+      salida del taller, esta fecha no puede ser anterior a la fecha en la que 
+      ingreso a reparacion.
+*/
 CREATE OR REPLACE TRIGGER TRG_VALIDAR_FECHASALIDA
 BEFORE INSERT OR UPDATE ON TBL_REGISTROMANTENIMIENTO
 FOR EACH ROW
@@ -259,6 +254,11 @@ BEGIN
 END;
 /
 
+/* 
+    - Al cerrar una asignacion de vehiculo, el kilometraje final registrado por 
+      el motorista obligatoriamente debe ser mayor o igual al kilometraje inicial 
+      con el que salio del predio.
+*/
 CREATE OR REPLACE TRIGGER TRG_VALIDAR_KILO_ASIGNACION
 BEFORE INSERT OR UPDATE ON TBL_ASIGNACIONVEHICULO
 FOR EACH ROW
@@ -271,6 +271,12 @@ BEGIN
 END;
 /
 
+/* 
+    - Cuando se completa una asignacion y se registra el kilometraje final, 
+      el sistema consulta el kilometraje actual del vehiculo en TBL_VEHICULO. 
+      Si el kilometraje final del viaje es mayor, actualiza automaticamente 
+      la ficha principal del carro para reflejar el uso real acumulado.
+*/
 CREATE OR REPLACE TRIGGER TRG_ACTUALIZAR_KILOMETRAJE
 AFTER INSERT OR UPDATE ON TBL_ASIGNACIONVEHICULO
 FOR EACH ROW
@@ -291,6 +297,12 @@ BEGIN
 END;
 /
 
+/* 
+    - Si se crea un registro de mantenimiento sin fecha de salida (esta en taller), 
+      el vehiculo pasa automaticamente a estado ID_ESTADO = 2 ("En Taller").
+    - En cuanto se registra la fecha de salida (reparacion terminada), el vehiculo 
+      se vuelve a marcar como ID_ESTADO = 1 ("Disponible").
+*/
 CREATE OR REPLACE TRIGGER TRG_ESTADO_MANTENIMIENTO
 AFTER INSERT OR UPDATE ON TBL_REGISTROMANTENIMIENTO
 FOR EACH ROW

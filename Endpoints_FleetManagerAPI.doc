@@ -2,909 +2,394 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Documento de Pruebas de Endpoints - FleetManager API</title>
+<title>Documentación Oficial de Endpoints y Pruebas - FleetManager API</title>
 <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 40px; color: #2d3748; line-height: 1.6; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 40px; color: #2d3748; line-height: 1.6; background-color: #ffffff; }
     h1 { color: #1a365d; border-bottom: 3px solid #3182ce; padding-bottom: 12px; margin-bottom: 20px; font-size: 26px; }
-    h2 { color: #2b6cb0; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-top: 40px; font-size: 20px; }
-    p { margin: 8px 0; }
+    h2 { color: #2b6cb0; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 40px; font-size: 20px; }
+    h3 { color: #2c5282; margin-top: 20px; font-size: 16px; }
+    p { margin: 8px 0; font-size: 14px; }
+    .badge { display: inline-block; padding: 4px 8px; font-weight: bold; border-radius: 4px; color: #fff; font-size: 12px; }
+    .badge-post { background-color: #38a169; }
+    .badge-get { background-color: #3182ce; }
+    .badge-put { background-color: #dd6b20; }
+    .badge-delete { background-color: #e53e3e; }
     table { width: 100%; border-collapse: collapse; margin: 15px 0; }
-    th, td { border: 1px solid #cbd5e0; padding: 10px; text-align: left; font-size: 14px; }
+    th, td { border: 1px solid #cbd5e0; padding: 10px; text-align: left; font-size: 13px; }
     th { background-color: #ebf8ff; color: #2c5282; font-weight: bold; }
     tr:nth-child(even) { background-color: #f7fafc; }
-    pre { background-color: #edf2f7; padding: 12px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; white-space: pre-wrap; border-left: 4px solid #3182ce; margin: 10px 0; }
-    .method { font-weight: bold; padding: 3px 6px; border-radius: 4px; font-size: 12px; display: inline-block; }
-    .post { background-color: #c6f6d5; color: #22543d; }
-    .get { background-color: #ebf8ff; color: #2b6cb0; }
-    .put { background-color: #feebc8; color: #744210; }
-    .delete { background-color: #fed7d7; color: #742a2a; }
+    pre { background-color: #f8fafc; padding: 12px; border-radius: 6px; font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; white-space: pre-wrap; border-left: 4px solid #3182ce; margin: 10px 0; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+    .alert-box { background-color: #ebf8ff; border-left: 4px solid #3182ce; padding: 12px 16px; margin: 15px 0; border-radius: 4px; font-size: 13px; }
 </style>
 </head>
 <body>
-    <h1>Guía Técnica de Endpoints — API FleetManager</h1>
-    <p>Este documento contiene todas las rutas correspondientes a la API de FleetManager para realizar pruebas a través de <strong>Postman</strong> u otro cliente HTTP.</p>
-    <p><strong>URL Base Local:</strong> <code>http://localhost:8080/api</code></p>
-    
-    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
 
-    <h2>1. Módulo: Rol</h2>
-    <p><strong>Descripción:</strong> Roles de usuario dentro del sistema (ej: Administrador, Motorista).</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/rols</code></td>
-                <td>Crear un nuevo registro de Rol.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/rols</code></td>
-                <td>Obtener todos los registros de Rol.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/rols/{id}</code></td>
-                <td>Obtener un registro de Rol por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/rols</code></td>
-                <td>Actualizar un registro existente de Rol.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/rols/{id}</code></td>
-                <td>Eliminar un registro de Rol por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombrerol": "Administrador"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idRol": 1,
-    "nombrerol": "Administrador"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>2. Módulo: Estado</h2>
-    <p><strong>Descripción:</strong> Estados de los vehículos (ej: Activo, Mantenimiento, Inactivo).</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/estados</code></td>
-                <td>Crear un nuevo registro de Estado.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/estados</code></td>
-                <td>Obtener todos los registros de Estado.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/estados/{id}</code></td>
-                <td>Obtener un registro de Estado por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/estados</code></td>
-                <td>Actualizar un registro existente de Estado.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/estados/{id}</code></td>
-                <td>Eliminar un registro de Estado por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombreestado": "Activo"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idEstado": 1,
-    "nombreestado": "Activo"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>3. Módulo: Marca</h2>
-    <p><strong>Descripción:</strong> Marcas de los vehículos (ej: Toyota, Nissan).</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/marcas</code></td>
-                <td>Crear un nuevo registro de Marca.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/marcas</code></td>
-                <td>Obtener todos los registros de Marca.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/marcas/{id}</code></td>
-                <td>Obtener un registro de Marca por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/marcas</code></td>
-                <td>Actualizar un registro existente de Marca.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/marcas/{id}</code></td>
-                <td>Eliminar un registro de Marca por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombremarca": "Toyota"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idMarca": 1,
-    "nombremarca": "Toyota"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>4. Módulo: Taller</h2>
-    <p><strong>Descripción:</strong> Talleres autorizados para el mantenimiento de vehículos.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/tallers</code></td>
-                <td>Crear un nuevo registro de Taller.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tallers</code></td>
-                <td>Obtener todos los registros de Taller.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tallers/{id}</code></td>
-                <td>Obtener un registro de Taller por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/tallers</code></td>
-                <td>Actualizar un registro existente de Taller.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/tallers/{id}</code></td>
-                <td>Eliminar un registro de Taller por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombretaller": "Taller Los Motores",
-    "direccion": "Avenida Siempre Viva 123",
-    "responsable": "Carlos Mecanico",
-    "telefonotaller": "2222-3333"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idTaller": 1,
-    "nombretaller": "Taller Los Motores",
-    "direccion": "Avenida Siempre Viva 123",
-    "responsable": "Carlos Mecanico",
-    "telefonotaller": "2222-3333"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>5. Módulo: Tipomantenimiento</h2>
-    <p><strong>Descripción:</strong> Clasificación de mantenimientos (Preventivo, Correctivo).</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/tipomantenimientos</code></td>
-                <td>Crear un nuevo registro de Tipomantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tipomantenimientos</code></td>
-                <td>Obtener todos los registros de Tipomantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tipomantenimientos/{id}</code></td>
-                <td>Obtener un registro de Tipomantenimiento por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/tipomantenimientos</code></td>
-                <td>Actualizar un registro existente de Tipomantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/tipomantenimientos/{id}</code></td>
-                <td>Eliminar un registro de Tipomantenimiento por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombretipom": "Preventivo"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idTipomantenimiento": 1,
-    "nombretipom": "Preventivo"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>6. Módulo: Usuario</h2>
-    <p><strong>Descripción:</strong> Información de los usuarios y empleados.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/usuarios</code></td>
-                <td>Crear un nuevo registro de Usuario.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/usuarios</code></td>
-                <td>Obtener todos los registros de Usuario.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/usuarios/{id}</code></td>
-                <td>Obtener un registro de Usuario por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/usuarios</code></td>
-                <td>Actualizar un registro existente de Usuario.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/usuarios/{id}</code></td>
-                <td>Eliminar un registro de Usuario por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombre": "Juan",
-    "apellido": "Perez",
-    "carnet": "JP123456",
-    "dui": "12345678-9",
-    "telefono": "7777-8888",
-    "correo": "juan.perez@email.com",
-    "passwordhash": "password123",
-    "fkRol": 1
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idUsuario": 1,
-    "nombre": "Juan",
-    "apellido": "Perez",
-    "carnet": "JP123456",
-    "dui": "12345678-9",
-    "telefono": "7777-8888",
-    "correo": "juan.perez@email.com",
-    "passwordhash": "password123",
-    "fkRol": 1
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>7. Módulo: Modelo</h2>
-    <p><strong>Descripción:</strong> Modelos asociados a marcas específicas.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/modelos</code></td>
-                <td>Crear un nuevo registro de Modelo.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/modelos</code></td>
-                <td>Obtener todos los registros de Modelo.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/modelos/{id}</code></td>
-                <td>Obtener un registro de Modelo por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/modelos</code></td>
-                <td>Actualizar un registro existente de Modelo.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/modelos/{id}</code></td>
-                <td>Eliminar un registro de Modelo por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombremodelo": "Corolla",
-    "fkMarca": 1
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idModelo": 1,
-    "nombremodelo": "Corolla",
-    "fkMarca": 1
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>8. Módulo: Mantenimiento</h2>
-    <p><strong>Descripción:</strong> Catálogo general de mantenimientos disponibles (ej: Cambio de aceite).</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/mantenimientos</code></td>
-                <td>Crear un nuevo registro de Mantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/mantenimientos</code></td>
-                <td>Obtener todos los registros de Mantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/mantenimientos/{id}</code></td>
-                <td>Obtener un registro de Mantenimiento por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/mantenimientos</code></td>
-                <td>Actualizar un registro existente de Mantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/mantenimientos/{id}</code></td>
-                <td>Eliminar un registro de Mantenimiento por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombremantenimiento": "Cambio de Aceite",
-    "costo": 35.00,
-    "fkTipomantenimiento": 1
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idMantenimiento": 1,
-    "nombremantenimiento": "Cambio de Aceite",
-    "costo": 35.00,
-    "fkTipomantenimiento": 1
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>9. Módulo: Tipo</h2>
-    <p><strong>Descripción:</strong> Tipos o submodelos de vehículos asociados a modelos.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/tipos</code></td>
-                <td>Crear un nuevo registro de Tipo.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tipos</code></td>
-                <td>Obtener todos los registros de Tipo.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/tipos/{id}</code></td>
-                <td>Obtener un registro de Tipo por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/tipos</code></td>
-                <td>Actualizar un registro existente de Tipo.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/tipos/{id}</code></td>
-                <td>Eliminar un registro de Tipo por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "nombretipo": "Sedan",
-    "fkModelo": 1
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idTipo": 1,
-    "nombretipo": "Sedan",
-    "fkModelo": 1
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>10. Módulo: Vehiculo</h2>
-    <p><strong>Descripción:</strong> Información detallada de los vehículos en la flota.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/vehiculos</code></td>
-                <td>Crear un nuevo registro de Vehiculo.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/vehiculos</code></td>
-                <td>Obtener todos los registros de Vehiculo.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/vehiculos/{id}</code></td>
-                <td>Obtener un registro de Vehiculo por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/vehiculos</code></td>
-                <td>Actualizar un registro existente de Vehiculo.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/vehiculos/{id}</code></td>
-                <td>Eliminar un registro de Vehiculo por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "placa": "P123-456",
-    "kilometraje": 15000.50,
-    "numerovin": "1HGCM82633A004123",
-    "tarjetacirculacion": "TARJ-987654321",
-    "fkTipo": 1,
-    "fkEstado": 1
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idVehiculo": 1,
-    "placa": "P123-456",
-    "kilometraje": 15000.50,
-    "numerovin": "1HGCM82633A004123",
-    "tarjetacirculacion": "TARJ-987654321",
-    "fkTipo": 1,
-    "fkEstado": 1
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>11. Módulo: Asignacionvehiculo</h2>
-    <p><strong>Descripción:</strong> Asignación de vehículos a motoristas con bitácora de viaje.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/asignacionvehiculos</code></td>
-                <td>Crear un nuevo registro de Asignacionvehiculo.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/asignacionvehiculos</code></td>
-                <td>Obtener todos los registros de Asignacionvehiculo.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/asignacionvehiculos/{id}</code></td>
-                <td>Obtener un registro de Asignacionvehiculo por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/asignacionvehiculos</code></td>
-                <td>Actualizar un registro existente de Asignacionvehiculo.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/asignacionvehiculos/{id}</code></td>
-                <td>Eliminar un registro de Asignacionvehiculo por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "fkUsuario": 1,
-    "fkVehiculo": 1,
-    "fechaasignacion": "2023-10-01",
-    "horasalida": "2023-10-01T08:00:00",
-    "horaentrega": "2023-10-01T17:00:00",
-    "kilometrajeinicial": 15000.50,
-    "kilometrajefinal": 15050.50,
-    "observaciones": "Viaje a sucursal"
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idAsignacion": 1,
-    "fkUsuario": 1,
-    "fkVehiculo": 1,
-    "fechaasignacion": "2023-10-01",
-    "horasalida": "2023-10-01T08:00:00",
-    "horaentrega": "2023-10-01T17:00:00",
-    "kilometrajeinicial": 15000.50,
-    "kilometrajefinal": 15050.50,
-    "observaciones": "Viaje a sucursal"
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>12. Módulo: Accidente</h2>
-    <p><strong>Descripción:</strong> Registro de accidentes viales asociados a asignaciones de viaje.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/accidentes</code></td>
-                <td>Crear un nuevo registro de Accidente.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/accidentes</code></td>
-                <td>Obtener todos los registros de Accidente.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/accidentes/{id}</code></td>
-                <td>Obtener un registro de Accidente por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/accidentes</code></td>
-                <td>Actualizar un registro existente de Accidente.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/accidentes/{id}</code></td>
-                <td>Eliminar un registro de Accidente por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "fechaaccidente": "2023-10-15",
-    "lugar": "Calle Principal",
-    "descripcion": "Choque leve",
-    "imagen": "/img/accidente1.jpg",
-    "fkAsignacion": 1
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idAccidente": 1,
-    "fechaaccidente": "2023-10-15",
-    "lugar": "Calle Principal",
-    "descripcion": "Choque leve",
-    "imagen": "/img/accidente1.jpg",
-    "fkAsignacion": 1
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>13. Módulo: Combustible</h2>
-    <p><strong>Descripción:</strong> Cargas de combustible asociadas a viajes asignados.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/combustibles</code></td>
-                <td>Crear un nuevo registro de Combustible.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/combustibles</code></td>
-                <td>Obtener todos los registros de Combustible.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/combustibles/{id}</code></td>
-                <td>Obtener un registro de Combustible por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/combustibles</code></td>
-                <td>Actualizar un registro existente de Combustible.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/combustibles/{id}</code></td>
-                <td>Eliminar un registro de Combustible por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "galonestotales": 10.5,
-    "fechacarga": "2023-10-02",
-    "costo": 45.50,
-    "imagenfactura": "/img/factura1.jpg",
-    "fkAsignacion": 1
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idCombustible": 1,
-    "galonestotales": 10.5,
-    "fechacarga": "2023-10-02",
-    "costo": 45.50,
-    "imagenfactura": "/img/factura1.jpg",
-    "fkAsignacion": 1
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>14. Módulo: Registromantenimiento</h2>
-    <p><strong>Descripción:</strong> Registro general de ingreso de vehículos a talleres.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/registromantenimientos</code></td>
-                <td>Crear un nuevo registro de Registromantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/registromantenimientos</code></td>
-                <td>Obtener todos los registros de Registromantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/registromantenimientos/{id}</code></td>
-                <td>Obtener un registro de Registromantenimiento por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/registromantenimientos</code></td>
-                <td>Actualizar un registro existente de Registromantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/registromantenimientos/{id}</code></td>
-                <td>Eliminar un registro de Registromantenimiento por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "fechaentrada": "2023-11-01",
-    "fechasalida": "2023-11-02",
-    "observaciones": "Mantenimiento rutinario",
-    "fkVehiculo": 1,
-    "fkTaller": 1,
-    "fkAccidente": null
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idRegistromantenimiento": 1,
-    "fechaentrada": "2023-11-01",
-    "fechasalida": "2023-11-02",
-    "observaciones": "Mantenimiento rutinario",
-    "fkVehiculo": 1,
-    "fkTaller": 1,
-    "fkAccidente": null
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
-    <h2>15. Módulo: Detallemantenimiento</h2>
-    <p><strong>Descripción:</strong> Detalle de los mantenimientos específicos realizados dentro de un registro.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 15%;">Método</th>
-                <th style="width: 45%;">Endpoint</th>
-                <th style="width: 40%;">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="method post">POST</span></td>
-                <td><code>/api/detallemantenimientos</code></td>
-                <td>Crear un nuevo registro de Detallemantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/detallemantenimientos</code></td>
-                <td>Obtener todos los registros de Detallemantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method get">GET</span></td>
-                <td><code>/api/detallemantenimientos/{id}</code></td>
-                <td>Obtener un registro de Detallemantenimiento por su ID.</td>
-            </tr>
-            <tr>
-                <td><span class="method put">PUT</span></td>
-                <td><code>/api/detallemantenimientos</code></td>
-                <td>Actualizar un registro existente de Detallemantenimiento.</td>
-            </tr>
-            <tr>
-                <td><span class="method delete">DELETE</span></td>
-                <td><code>/api/detallemantenimientos/{id}</code></td>
-                <td>Eliminar un registro de Detallemantenimiento por su ID.</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <p><strong>Estructura del Payload para Creación (POST):</strong></p>
-    <pre>{
-    "cantidad": 1,
-    "costo": 35.00,
-    "fkRegistromantenimiento": 1,
-    "fkMantenimiento": 1
-}</pre>
-    
-    <p><strong>Estructura del Payload para Actualización (PUT):</strong></p>
-    <pre>{
-    "idDetallemantenimiento": 1,
-    "cantidad": 1,
-    "costo": 35.00,
-    "fkRegistromantenimiento": 1,
-    "fkMantenimiento": 1
-}</pre>
-    
-    <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
-    
+<h1>FleetManager API — Documentación de Endpoints REST</h1>
+
+<div class="alert-box">
+    <strong>Resumen de Actualizaciones:</strong><br>
+    - Se corrigieron los endpoints <code>PUT</code> en toda la API para requerir obligatoriamente el parámetro de ruta <code>/{id}</code> (ejemplo: <code>PUT /api/vehiculos/{id}</code>).<br>
+    - Se refactorizó la arquitectura para eliminar los bloques <code>try-catch</code> genéricos, permitiendo que la API retorne respuestas estandarizadas vía <code>GlobalExceptionHandler</code>.<br>
+    - Todos los métodos retornan la envoltura <code>ApiResponse&lt;T&gt;</code> con campos <code>exito</code>, <code>mensaje</code> y <code>datos</code>.
+</div>
+
+<h2>1. Formato Estandarizado de Respuesta (ApiResponse&lt;T&gt;)</h2>
+<p>Todas las respuestas HTTP emitidas por los controladores siguen la siguiente estructura JSON unificada:</p>
+<pre>
+{
+    "exito": true,
+    "mensaje": "Dato ingresado exitosamente",
+    "datos": { ... }
+}
+</pre>
+
+<h2>2. Detalle de Endpoints por Módulo (15 Controladores)</h2>
+<h2>Módulo Rol (/api/rols)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/rols — Crear Rol</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombrerol": "Administrador"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {"idRol": 1, "nombrerol": "Administrador"}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/rols — Obtener Todos los Roles</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [{"idRol": 1, "nombrerol": "Administrador"}]}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/rols/{id} — Obtener Rol por ID</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato encontrado", "datos": {"idRol": 1, "nombrerol": "Administrador"}}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/rols/{id} — Actualizar Rol</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idRol": 1,
+  "nombrerol": "Super Administrador"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {"idRol": 1, "nombrerol": "Super Administrador"}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/rols/{id} — Eliminar Rol por ID</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato con ID 1 eliminado exitosamente", "datos": null}</pre><h2>Módulo Usuario (/api/usuarios)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/usuarios — Crear Usuario</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 400 Bad Request</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombre": "Carlos",
+  "apellido": "Lopez",
+  "carnet": "EMP-001",
+  "dui": "12345678-9",
+  "telefono": "7777-8888",
+  "correo": "carlos@empresa.com",
+  "passwordhash": "hash_seguro",
+  "fkRol": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/usuarios — Listar Usuarios</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/usuarios/{id} — Obtener Usuario por ID</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato encontrado", "datos": {...}}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/usuarios/{id} — Actualizar Usuario</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombre": "Carlos Alberto",
+  "apellido": "Lopez",
+  "carnet": "EMP-001",
+  "dui": "12345678-9",
+  "telefono": "7777-8888",
+  "correo": "carlos@empresa.com",
+  "passwordhash": "nuevo_hash",
+  "fkRol": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/usuarios/{id} — Eliminar Usuario</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato con ID 1 eliminado exitosamente", "datos": null}</pre><h2>Módulo Estado (/api/estados)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/estados — Crear Estado</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombreestado": "Disponible"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/estados — Listar Estados</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/estados/{id} — Obtener Estado por ID</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato encontrado", "datos": {...}}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/estados/{id} — Actualizar Estado</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idEstado": 1,
+  "nombreestado": "Disponible"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/estados/{id} — Eliminar Estado</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato con ID 1 eliminado exitosamente", "datos": null}</pre><h2>Módulo Marca (/api/marcas)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/marcas — Crear Marca</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombremarca": "Toyota"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/marcas — Listar Marcas</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/marcas/{id} — Actualizar Marca</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idMarca": 1,
+  "nombremarca": "Toyota Motor"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/marcas/{id} — Eliminar Marca</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Modelo (/api/modelos)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/modelos — Crear Modelo</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombremodelo": "Hilux",
+  "fkMarca": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/modelos — Listar Modelos</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/modelos/{id} — Actualizar Modelo</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idModelo": 1,
+  "nombremodelo": "Hilux 4x4",
+  "fkMarca": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/modelos/{id} — Eliminar Modelo</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Tipo (/api/tipos)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/tipos — Crear Tipo</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombretipo": "Pick-up",
+  "fkModelo": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/tipos — Listar Tipos</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/tipos/{id} — Actualizar Tipo</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idTipo": 1,
+  "nombretipo": "Pick-up Doble Cabina",
+  "fkModelo": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/tipos/{id} — Eliminar Tipo</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Vehículo (/api/vehiculos)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/vehiculos — Crear Vehículo</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 400 Bad Request</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "placa": "P012-345",
+  "kilometraje": 15000.00,
+  "numerovin": "1HGCR2F83HA000000",
+  "tarjetacirculacion": "TC-99887766",
+  "fkTipo": 1,
+  "fkEstado": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/vehiculos — Listar Vehículos</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/vehiculos/{id} — Obtener Vehículo por ID</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato encontrado", "datos": {...}}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/vehiculos/{id} — Actualizar Vehículo</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idVehiculo": 1,
+  "placa": "P012-345",
+  "kilometraje": 18500.00,
+  "numerovin": "1HGCR2F83HA000000",
+  "tarjetacirculacion": "TC-99887766",
+  "fkTipo": 1,
+  "fkEstado": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/vehiculos/{id} — Eliminar Vehículo</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Asignación Vehículo (/api/asignacionvehiculos)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/asignacionvehiculos — Crear Asignación</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "fkUsuario": 1,
+  "fkVehiculo": 1,
+  "fechaasignacion": "2026-07-22",
+  "horasalida": "2026-07-22T08:00:00",
+  "kilometrajeinicial": 15000.00
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/asignacionvehiculos — Listar Asignaciones</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/asignacionvehiculos/{id} — Cerrar/Actualizar Asignación</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idAsignacion": 1,
+  "fkUsuario": 1,
+  "fkVehiculo": 1,
+  "fechaasignacion": "2026-07-22",
+  "horasalida": "2026-07-22T08:00:00",
+  "horaentrega": "2026-07-22T17:00:00",
+  "kilometrajeinicial": 15000.00,
+  "kilometrajefinal": 15240.00,
+  "observaciones": "Entrega sin novedades"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/asignacionvehiculos/{id} — Eliminar Asignación</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Accidente (/api/accidentes)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/accidentes — Reportar Accidente</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "fechaaccidente": "2026-07-22",
+  "lugar": "Km 15 Carretera al Puerto",
+  "descripcion": "Colisión leve trasera",
+  "imagen": "accidente_01.jpg",
+  "fkAsignacion": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/accidentes — Listar Accidentes</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/accidentes/{id} — Actualizar Accidente</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idAccidente": 1,
+  "fechaaccidente": "2026-07-22",
+  "lugar": "Km 15 Carretera al Puerto",
+  "descripcion": "Colisión leve trasera con reparaciones en curso",
+  "imagen": "accidente_01_actualizado.jpg",
+  "fkAsignacion": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/accidentes/{id} — Eliminar Accidente</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Combustible (/api/combustibles)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/combustibles — Registrar Carga Combustible</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "galonestotales": 12.50,
+  "fechacarga": "2026-07-22",
+  "costo": 45.00,
+  "imagenfactura": "factura_gas_001.jpg",
+  "fkAsignacion": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/combustibles — Listar Cargas</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/combustibles/{id} — Actualizar Carga</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idCombustible": 1,
+  "galonestotales": 12.50,
+  "fechacarga": "2026-07-22",
+  "costo": 45.00,
+  "imagenfactura": "factura_gas_001.jpg",
+  "fkAsignacion": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/combustibles/{id} — Eliminar Carga</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Taller (/api/talleres)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/talleres — Crear Taller</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombretaller": "Mecánica Central",
+  "direccion": "Av. Peralta #123",
+  "responsable": "Ing. Jose Martinez",
+  "telefonotaller": "2222-3333"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/talleres — Listar Talleres</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/talleres/{id} — Actualizar Taller</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idTaller": 1,
+  "nombretaller": "Mecánica Central S.A.",
+  "direccion": "Av. Peralta #123",
+  "responsable": "Ing. Jose Martinez",
+  "telefonotaller": "2222-3333"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/talleres/{id} — Eliminar Taller</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Tipo Mantenimiento (/api/tipomantenimientos)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/tipomantenimientos — Crear Tipo Mantenimiento</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombretipom": "Preventivo"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/tipomantenimientos — Listar Tipos Mantenimiento</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/tipomantenimientos/{id} — Actualizar Tipo Mantenimiento</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idTipomantenimiento": 1,
+  "nombretipom": "Preventivo"
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/tipomantenimientos/{id} — Eliminar Tipo Mantenimiento</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Mantenimiento (/api/mantenimientos)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/mantenimientos — Crear Servicio Mantenimiento</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "nombremantenimiento": "Cambio de Aceite 10W30",
+  "costo": 35.00,
+  "fkTipomantenimiento": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/mantenimientos — Listar Servicios</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/mantenimientos/{id} — Actualizar Servicio</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idMantenimiento": 1,
+  "nombremantenimiento": "Cambio de Aceite Sintético",
+  "costo": 45.00,
+  "fkTipomantenimiento": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/mantenimientos/{id} — Eliminar Servicio</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Registro Mantenimiento (/api/registromantenimientos)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/registromantenimientos — Ingresar Carro a Taller</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "fechaentrada": "2026-07-22",
+  "observaciones": "Revisión general de frenos",
+  "fkVehiculo": 1,
+  "fkTaller": 1,
+  "fkAccidente": null
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/registromantenimientos — Listar Órdenes de Taller</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/registromantenimientos/{id} — Dar Salida de Taller</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idRegistromantenimiento": 1,
+  "fechaentrada": "2026-07-22",
+  "fechasalida": "2026-07-23",
+  "observaciones": "Frenos cambiados y probados",
+  "fkVehiculo": 1,
+  "fkTaller": 1,
+  "fkAccidente": null
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/registromantenimientos/{id} — Eliminar Registro Taller</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre><h2>Módulo Detalle Mantenimiento (/api/detallemantenimientos)</h2>
+        <h3><span class="badge badge-post">POST</span> /api/detallemantenimientos — Agregar Ítem a Orden de Taller</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "cantidad": 4,
+  "costo": 120.00,
+  "fkRegistromantenimiento": 1,
+  "fkMantenimiento": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato ingresado exitosamente", "datos": {...}}</pre>
+        <h3><span class="badge badge-get">GET</span> /api/detallemantenimientos — Listar Detalles</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": [...]}</pre>
+        <h3><span class="badge badge-put">PUT</span> /api/detallemantenimientos/{id} — Actualizar Ítem</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Cuerpo de Petición (JSON Request Body):</strong></p><pre>{
+  "idDetallemantenimiento": 1,
+  "cantidad": 4,
+  "costo": 120.00,
+  "fkRegistromantenimiento": 1,
+  "fkMantenimiento": 1
+}</pre><p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Proceso completado", "datos": {...}}</pre>
+        <h3><span class="badge badge-delete">DELETE</span> /api/detallemantenimientos/{id} — Eliminar Ítem</h3>
+        <p><strong>Código HTTP Esperado:</strong> 200 OK / 404 Not Found</p>
+        <p><strong>Respuesta de la API (JSON Response):</strong></p><pre>{"exito": true, "mensaje": "Dato eliminado exitosamente", "datos": null}</pre>
 </body>
 </html>
